@@ -6,7 +6,12 @@
     <x-maz-sidebar-item name="Dashboard" :link="route('dasbordmonitoring')" icon="bi bi-grid-fill"></x-maz-sidebar-item>
     <x-maz-sidebar-item name="Data Karyawan" :link="route('employee')" icon="bi bi-people-fill"></x-maz-sidebar-item>
     <x-maz-sidebar-item name="Live Monitoring" :link="route('monitoring')" icon="bi bi-camera-video"></x-maz-sidebar-item>
-    <x-maz-sidebar-item name="Laporan KPI" :link="route('kpi-reports')" icon="bi bi-file-bar-graph"></x-maz-sidebar-item>
+    <x-maz-sidebar-item name="Monitoring Offline" :link="route('monitoring-offline')" icon="bi bi-tv"></x-maz-sidebar-item>
+    <!-- <x-maz-sidebar-item name="Laporan KPI" :link="route('kpi-reports')" icon="bi bi-file-bar-graph"></x-maz-sidebar-item> -->
+    <!-- <x-maz-sidebar-item name="Laporan Nilai Kedisiplinan Pegawai" :link="route('discipline-reports')" icon="bi bi-file-bar-graph"></x-maz-sidebar-item> -->
+     <!-- <x-maz-sidebar-item name="Laporan KPI" :link="route('kpi-reports')" icon="bi bi-file-bar-graph"></x-maz-sidebar-item> -->
+    <x-maz-sidebar-item name="Laporan Nilai Kedisiplinan Pegawai" :link="route('discipline-reports')" icon="bi bi-file-bar-graph"></x-maz-sidebar-item>
+
 
     {{-- <x-maz-sidebar-item name="Dashy" :link="route('dashboard')" icon="bi bi-grid-fill"></x-maz-sidebar-item> --}}
     {{-- <x-maz-sidebar-item name="Component" icon="bi bi-stack">

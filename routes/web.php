@@ -58,5 +58,17 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::get('/kpi-reports', [KeyPerformanceKpiReportController::class, 'index'])->name('kpi-reports');
     Route::get('/employee',[EmployeeController::class, 'getDataPegawai'])->name('employee');
 
+    // Route::get('/monitoring-offline', function () {
+    //     return view('admin.monitoringoffline');  // pastikan Anda memiliki view 'admin.monitoringoffline'
+    // })->name('monitoring-offline');
+    
+    Route::get('/monitoring-offline', function () {
+        return view('admin.offlinemonitoring.monitoringoffline'); // Perbarui path view
+    })->name('monitoring-offline');
+
+    Route::get('/discipline-reports', [KeyPerformanceKpiReportController::class, 'index'])->name('discipline-reports');
+
+    
+
 
 });
