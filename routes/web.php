@@ -20,15 +20,12 @@ use App\Models\KeyPerformanceKpiReport;
 Route::get('/', function () {
     return view('welcome');
 });
-
-// Grouping routes with middleware
-Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
+Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
 
-    // Components routes group
-    Route::group(['prefix' => 'components', 'as' => 'components.'], function () {
+    Route::group(['prefix' => 'components', 'as' => 'components.'], function() {
         Route::get('/alert', function () {
             return view('admin.component.alert');
         })->name('alert');
@@ -37,18 +34,41 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
         })->name('accordion');
     });
 
-    // Monitoring routes
     Route::get('/monitoring', function () {
         return view('admin.livemonitoring.monitoring');
     })->name('monitoring');
 
     Route::get('/dashbordmonitoring', function () {
         return view('admin.dasbordmonitoring.dasbordmonitoring');
-    })->name('dashbordmonitoring');
+    })->name('dasbordmonitoring');
 
-    // KPI Reporting route with unique name
     Route::get('/reportingkpi', function () {
         $data = KeyPerformanceKpiReport::all();
         return view('admin.reportingkpi.reporting')->with($data);
-    })->name('reporting.kpi');
+    })->name('kpi-reports');
+
+    // Route::get('/employee', function () {
+    //     return view('admin.employee.employee');
+    // })->name('employee');
+
+    // Route::get('/start-streaming', [Streaming::class, 'startStreaming'])->name('start.streaming');
+    // Route::get('/start-streaming', [StreamingController::class, 'startStreaming'])->name('start.streaming');
+
+
+    Route::get('/kpi-reports', [KeyPerformanceKpiReportController::class, 'index'])->name('kpi-reports');
+    Route::get('/employee',[EmployeeController::class, 'getDataPegawai'])->name('employee');
+
+    // Route::get('/monitoring-offline', function () {
+    //     return view('admin.monitoringoffline');  // pastikan Anda memiliki view 'admin.monitoringoffline'
+    // })->name('monitoring-offline');
+    
+    Route::get('/monitoring-offline', function () {
+        return view('admin.offlinemonitoring.monitoringoffline'); // Perbarui path view
+    })->name('monitoring-offline');
+
+    Route::get('/discipline-reports', [KeyPerformanceKpiReportController::class, 'index'])->name('discipline-reports');
+
+    
+
+
 });
