@@ -5,7 +5,7 @@
             <a href="index.html"><img src="{{ asset('/images/logo/logo.png') }}" alt="Logo"></a>
         </div>
         <h1 class="auth-title">Log in.</h1>
-        <p class="auth-subtitle mb-5">Silakan login terlebih dahulu.</p>
+        <p class="auth-subtitle mb-5">your data will be safe.</p>
 
         @if (session('status'))
         <div class="mb-4 font-medium text-sm text-green-600">
