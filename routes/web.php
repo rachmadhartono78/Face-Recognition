@@ -68,6 +68,10 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
 
     Route::get('/discipline-reports', [KeyPerformanceKpiReportController::class, 'index'])->name('discipline-reports');
 
+    Route::get('/start-streaming', [StreamingController::class, 'startStreaming'])->name('start.streaming');
+    Route::get('/attendance', [StreamingController::class, 'getAttendance'])->name('get.attendance');
+
+
     
 
 
