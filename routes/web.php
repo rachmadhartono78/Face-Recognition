@@ -5,6 +5,7 @@ use App\Http\Controllers\Streaming;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KeyPerformanceKpiReportController;
 use App\Models\KeyPerformanceKpiReport;
+use App\Http\Controllers\EmployeePresenceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,7 @@ use App\Models\KeyPerformanceKpiReport;
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::get('/dashboard', function () {
         return view('dashboard');
@@ -44,35 +46,44 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
 
     Route::get('/reportingkpi', function () {
         $data = KeyPerformanceKpiReport::all();
-        return view('admin.reportingkpi.reporting')->with($data);
+        return view('admin.reportingkpi.reporting', ['data' => $data]);
     })->name('kpi-reports');
 
-    // Route::get('/employee', function () {
-    //     return view('admin.employee.employee');
-    // })->name('employee');
-
-    // Route::get('/start-streaming', [Streaming::class, 'startStreaming'])->name('start.streaming');
-    // Route::get('/start-streaming', [StreamingController::class, 'startStreaming'])->name('start.streaming');
-
-
     Route::get('/kpi-reports', [KeyPerformanceKpiReportController::class, 'index'])->name('kpi-reports');
-    Route::get('/employee',[EmployeeController::class, 'getDataPegawai'])->name('employee');
+    Route::get('/employee', [EmployeeController::class, 'getDataPegawai'])->name('employee');
 
-    // Route::get('/monitoring-offline', function () {
-    //     return view('admin.monitoringoffline');  // pastikan Anda memiliki view 'admin.monitoringoffline'
-    // })->name('monitoring-offline');
-    
     Route::get('/monitoring-offline', function () {
-        return view('admin.offlinemonitoring.monitoringoffline'); // Perbarui path view
+        return view('admin.offlinemonitoring.monitoringoffline');
     })->name('monitoring-offline');
 
     Route::get('/discipline-reports', [KeyPerformanceKpiReportController::class, 'index'])->name('discipline-reports');
 
     Route::get('/start-streaming', [StreamingController::class, 'startStreaming'])->name('start.streaming');
     Route::get('/attendance', [StreamingController::class, 'getAttendance'])->name('get.attendance');
-
-
     
+    Route::get('/employee', [EmployeeController::class, 'getDataPegawai'])->name('employee');
+    Route::post('/presensi/filter', [EmployeeController::class, 'getDataPegawai'])->name('presensi.filter');
+
+    // Route::get('/employee-presence', [EmployeePresenceController::class, 'index'])->name('employee-presence');
+    Route::get('/employee-presence', [EmployeePresenceController::class, 'index'])->name('employee-presence');
 
 
+    Route::get('/attendance-monitoring', [AttendanceMonitoringController::class, 'index'])->name('attendance-monitoring');
+
+    Route::prefix('settings')->group(function () {
+        Route::get('attendance-types', [SettingsController::class, 'attendanceTypes'])->name('settings.attendance-types');
+        Route::get('special-working-hours', [SettingsController::class, 'specialWorkingHours'])->name('settings.special-working-hours');
+        Route::get('leave-types', [SettingsController::class, 'leaveTypes'])->name('settings.leave-types');
+        Route::get('holidays', [SettingsController::class, 'holidays'])->name('settings.holidays');
+    });
+
+    Route::get('/presensi', function () {
+        return view('presensi.presensi', [
+            'selectOptions' => $selectOptions,
+            'dataUnit' => $dataUnit,
+            'dataTypePresence' => $dataTypePresence,
+            'pageNumber' => $pageNumber
+        ]);
+    });
 });
+
