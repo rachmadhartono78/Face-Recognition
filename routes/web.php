@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KeyPerformanceKpiReportController;
 use App\Models\KeyPerformanceKpiReport;
 use App\Http\Controllers\EmployeePresenceController;
+use App\Http\Controllers\DashboardMonitoringController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,9 +41,10 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
         return view('admin.livemonitoring.monitoring');
     })->name('monitoring');
 
-    Route::get('/dashbordmonitoring', function () {
-        return view('admin.dasbordmonitoring.dasbordmonitoring');
-    })->name('dasbordmonitoring');
+    // Route::get('/dashbordmonitoring', function () {
+    //     return view('admin.dasbordmonitoring.dasbordmonitoring');
+    // })->name('dasbordmonitoring');
+    Route::get('/dashbordmonitoring', [DashboardMonitoringController::class, 'index'])->name('dasbordmonitoring');
 
     Route::get('/reportingkpi', function () {
         $data = KeyPerformanceKpiReport::all();
