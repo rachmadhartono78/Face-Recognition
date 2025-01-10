@@ -6,26 +6,16 @@
     <x-maz-sidebar-sub-item name="Laporan Nilai Kedisiplinan" :link="route('discipline-reports')" icon="bi bi-file-bar-graph"></x-maz-sidebar-sub-item>
     <x-maz-sidebar-sub-item name="Monitoring Kehadiran" :link="route('attendance-monitoring')" icon="bi bi-calendar-check-fill"></x-maz-sidebar-sub-item>
     </x-maz-sidebar-item>
-
     <x-maz-sidebar-item name="Data Karyawan" :link="route('employee')" icon="bi bi-people-fill"></x-maz-sidebar-item>
-    <x-maz-sidebar-item name="Recorded Monitoring" :link="route('recorded-videos')" icon="bi bi-camera-video"></x-maz-sidebar-item>
     <x-maz-sidebar-item name="Live Monitoring" :link="route('live-monitoring')" icon="bi bi-tv"></x-maz-sidebar-item>
+    <x-maz-sidebar-item name="Recorded Monitoring" :link="route('recorded-videos')" icon="bi bi-camera-video"></x-maz-sidebar-item>
     <x-maz-sidebar-item name="Laporan Nilai Kedisiplinan Pegawai" :link="route('discipline-reports')" icon="bi bi-file-bar-graph"></x-maz-sidebar-item>
-
-
-    {{-- <x-maz-sidebar-item name="Dashy" :link="route('dashboard')" icon="bi bi-grid-fill"></x-maz-sidebar-item> --}}
-    {{-- <x-maz-sidebar-item name="Component" icon="bi bi-stack">
-        <x-maz-sidebar-sub-item name="Accordion" :link="route('components.accordion')"></x-maz-sidebar-sub-item>
-        <x-maz-sidebar-sub-item name="Alert" :link="route('components.alert')"></x-maz-sidebar-sub-item> --}}
-    {{-- </x-maz-sidebar-item> --}}
-
-        <!-- Tambahkan Menu Pengaturan -->
-        <x-maz-sidebar-item name="Pengaturan" icon="bi bi-gear">
-        <x-maz-sidebar-sub-item name="Jenis Presensi" :link="route('settings.attendance-types')" icon="bi bi-check-square"></x-maz-sidebar-sub-item>
-        <x-maz-sidebar-sub-item name="Jam Kerja Khusus" :link="route('settings.special-working-hours')" icon="bi bi-clock"></x-maz-sidebar-sub-item>
-        <x-maz-sidebar-sub-item name="Jenis Izin" :link="route('settings.leave-types')" icon="bi bi-file-earmark-text"></x-maz-sidebar-sub-item>
-        <x-maz-sidebar-sub-item name="Hari Libur" :link="route('settings.holidays')" icon="bi bi-calendar-event"></x-maz-sidebar-sub-item>
-        </x-maz-sidebar-item>
+    <x-maz-sidebar-item name="Pengaturan" icon="bi bi-gear">
+    <x-maz-sidebar-sub-item name="Jenis Presensi" :link="route('settings.attendance-types')" icon="bi bi-check-square"></x-maz-sidebar-sub-item>
+    <x-maz-sidebar-sub-item name="Jam Kerja Khusus" :link="route('settings.special-working-hours')" icon="bi bi-clock"></x-maz-sidebar-sub-item>
+    <x-maz-sidebar-sub-item name="Jenis Izin" :link="route('settings.leave-types')" icon="bi bi-file-earmark-text"></x-maz-sidebar-sub-item>
+    <x-maz-sidebar-sub-item name="Hari Libur" :link="route('settings.holidays')" icon="bi bi-calendar-event"></x-maz-sidebar-sub-item>
+    </x-maz-sidebar-item>
 
 
 </x-maz-sidebar>
