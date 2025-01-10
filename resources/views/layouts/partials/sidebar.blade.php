@@ -9,7 +9,7 @@
 
     <x-maz-sidebar-item name="Data Karyawan" :link="route('employee')" icon="bi bi-people-fill"></x-maz-sidebar-item>
     <x-maz-sidebar-item name="Recorded Monitoring" :link="route('recorded-videos')" icon="bi bi-camera-video"></x-maz-sidebar-item>
-    <x-maz-sidebar-item name="Monitoring Offline" :link="route('monitoring-offline')" icon="bi bi-tv"></x-maz-sidebar-item>
+    <x-maz-sidebar-item name="Live Monitoring" :link="route('live-monitoring')" icon="bi bi-tv"></x-maz-sidebar-item>
     <x-maz-sidebar-item name="Laporan Nilai Kedisiplinan Pegawai" :link="route('discipline-reports')" icon="bi bi-file-bar-graph"></x-maz-sidebar-item>
 
 

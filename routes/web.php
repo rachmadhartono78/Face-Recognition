@@ -63,9 +63,9 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::get('/kpi-reports', [KeyPerformanceKpiReportController::class, 'index'])->name('kpi-reports');
     Route::get('/employee', [EmployeeController::class, 'getDataPegawai'])->name('employee');
 
-    Route::get('/monitoring-offline', function () {
+    Route::get('/live-monitoring', function () {
         return view('admin.offlinemonitoring.monitoringoffline');
-    })->name('monitoring-offline');
+    })->name('live-monitoring');
 
     Route::get('/discipline-reports', [KeyPerformanceKpiReportController::class, 'index'])->name('discipline-reports');
 
