@@ -7,6 +7,7 @@ use App\Http\Controllers\KeyPerformanceKpiReportController;
 use App\Models\KeyPerformanceKpiReport;
 use App\Http\Controllers\EmployeePresenceController;
 use App\Http\Controllers\DashboardMonitoringController;
+use App\Http\Controllers\RecordedVideoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,14 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
         $data = KeyPerformanceKpiReport::all();
         return view('admin.reportingkpi.reporting', ['data' => $data]);
     })->name('kpi-reports');
+
+    // Route::get('/recorded-videos', [RecordedVideoController::class, 'index'])->name('recorded-videos');
+    // Route::get('/recorded-videos/{id}/playback', [RecordedVideoController::class, 'playback'])->name('recorded-videos.playback');
+    // Route::get('/livemonitoring', [RecordedVideoController::class, 'index'])->name('livemonitoring');
+
+
+    Route::get('/recorded-videos', [RecordedVideoController::class, 'index'])->name('recorded-videos');
+    Route::get('/recorded-videos/{id}/playback', [RecordedVideoController::class, 'playback'])->name('recorded-videos.playback');
 
     Route::get('/kpi-reports', [KeyPerformanceKpiReportController::class, 'index'])->name('kpi-reports');
     Route::get('/employee', [EmployeeController::class, 'getDataPegawai'])->name('employee');
