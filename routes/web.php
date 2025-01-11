@@ -48,7 +48,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
         $data = KeyPerformanceKpiReport::all();
         return view('admin.reportingkpi.reporting', ['data' => $data]);
     })->name('kpi-reports');
-
+    
     Route::get('/recorded-videos', [RecordedVideoController::class, 'index'])->name('recorded-videos');
     Route::get('/recorded-videos/{id}/playback', [RecordedVideoController::class, 'playback'])->name('recorded-videos.playback');
     Route::get('/kpi-reports', [KeyPerformanceKpiReportController::class, 'index'])->name('kpi-reports');
@@ -60,7 +60,6 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::get('/employee', [EmployeeController::class, 'getDataPegawai'])->name('employee');
     Route::post('/presensi/filter', [EmployeeController::class, 'getDataPegawai'])->name('presensi.filter');
     Route::get('/employee-presence', [EmployeePresenceController::class, 'index'])->name('employee-presence');
-
 
     Route::get('/attendance-monitoring', [AttendanceMonitoringController::class, 'index'])->name('attendance-monitoring');
 
