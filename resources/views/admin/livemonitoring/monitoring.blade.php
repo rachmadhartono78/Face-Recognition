@@ -1,19 +1,6 @@
 
 <x-app-layout>
     <x-slot name="header">
-    {{-- <div class="row">
-        <div class="col-12 col-md-6 order-md-1 order-last">
-            <h3>Dashboard</h3>
-            <!-- <p class="text-subtitle text-muted">This is the main page.</p> -->
-        </div>
-        <div class="col-12 col-md-6 order-md-2 order-first">
-            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-                </ol>
-            </nav>
-        </div>
-    </div> --}}
 </x-slot>
 <div class="page-heading">
     <div class="page-title">
@@ -33,12 +20,8 @@
         </div>
     </div>
     <div class="flex-1 p-10">
-        <!-- <h1 class="text-4xl font-bold mb-10">
-            Live Monitoring
         </h1> -->
         <div class="grid grid-cols-3 gap-4">
-            <!-- Live Feed -->
-
             <div class="col-span-2">
                 <div class="bg-white p-5 rounded-lg shadow-lg mb-5">
                     <div class="flex items-center justify-between mb-3">

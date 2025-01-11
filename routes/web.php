@@ -8,6 +8,7 @@ use App\Models\KeyPerformanceKpiReport;
 use App\Http\Controllers\EmployeePresenceController;
 use App\Http\Controllers\DashboardMonitoringController;
 use App\Http\Controllers\RecordedVideoController;
+use App\Http\Controllers\StreamingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,10 +42,6 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::get('/monitoring', function () {
         return view('admin.livemonitoring.monitoring');
     })->name('monitoring');
-
-    // Route::get('/dashbordmonitoring', function () {
-    //     return view('admin.dasbordmonitoring.dasbordmonitoring');
-    // })->name('dasbordmonitoring');
     Route::get('/dashbordmonitoring', [DashboardMonitoringController::class, 'index'])->name('dasbordmonitoring');
 
     Route::get('/reportingkpi', function () {
@@ -52,30 +49,16 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
         return view('admin.reportingkpi.reporting', ['data' => $data]);
     })->name('kpi-reports');
 
-    // Route::get('/recorded-videos', [RecordedVideoController::class, 'index'])->name('recorded-videos');
-    // Route::get('/recorded-videos/{id}/playback', [RecordedVideoController::class, 'playback'])->name('recorded-videos.playback');
-    // Route::get('/livemonitoring', [RecordedVideoController::class, 'index'])->name('livemonitoring');
-
-
     Route::get('/recorded-videos', [RecordedVideoController::class, 'index'])->name('recorded-videos');
     Route::get('/recorded-videos/{id}/playback', [RecordedVideoController::class, 'playback'])->name('recorded-videos.playback');
-
     Route::get('/kpi-reports', [KeyPerformanceKpiReportController::class, 'index'])->name('kpi-reports');
     Route::get('/employee', [EmployeeController::class, 'getDataPegawai'])->name('employee');
-
-    Route::get('/live-monitoring', function () {
-        return view('admin.offlinemonitoring.monitoringoffline');
-    })->name('live-monitoring');
-
+    Route::get('/live-monitoring', [StreamingController::class, 'startStreaming'])->name('live-monitoring');
     Route::get('/discipline-reports', [KeyPerformanceKpiReportController::class, 'index'])->name('discipline-reports');
-
     Route::get('/start-streaming', [StreamingController::class, 'startStreaming'])->name('start.streaming');
     Route::get('/attendance', [StreamingController::class, 'getAttendance'])->name('get.attendance');
-    
     Route::get('/employee', [EmployeeController::class, 'getDataPegawai'])->name('employee');
     Route::post('/presensi/filter', [EmployeeController::class, 'getDataPegawai'])->name('presensi.filter');
-
-    // Route::get('/employee-presence', [EmployeePresenceController::class, 'index'])->name('employee-presence');
     Route::get('/employee-presence', [EmployeePresenceController::class, 'index'])->name('employee-presence');
 
 

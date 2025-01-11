@@ -13,13 +13,8 @@ class EmployeePresenceController extends Controller
         $presensi = DB::table('presensi_harian')
             ->select('nip', 'tanggal', 'jam_masuk', 'jam_pulang', 'total_jam', 'working_hours', 'keterangan')
             ->orderBy('tanggal', 'desc')
-            ->paginate(10); // Bisa diubah jumlah data per halaman
+            ->paginate(10);
 
-        // Kirim data ke view
-        // return view('presensi.index', [
-        //     'title' => 'Data Presensi',
-        //     'presensi' => $presensi
-        // ]);
         return view('employee-presence.index', compact('presensi'));
     }
 }
