@@ -1,12 +1,52 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="row">
-            <div class="col-12 col-md-6 order-md-1 order-last">
+        <head>
+            <style>
+                .pagination {
+                    display: flex;
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                }
+
+                .pagination .page-item {
+                    margin: 0 5px;
+                }
+
+                .pagination .page-link {
+                    padding: 8px 12px;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                    text-decoration: none;
+                    color: #007bff;
+                }
+
+                .pagination .page-link:hover {
+                    background-color: #007bff;
+                    color: white;
+                }
+
+                .pagination .page-item.active .page-link {
+                    background-color: #007bff;
+                    color: white;
+                    border-color: #007bff;
+                }
+
+                .pagination .page-item.disabled .page-link {
+                    color: #6c757d;
+                    pointer-events: none;
+                    background-color: #f8f9fa;
+                }
+            </style>
+        </head>
+
+        <div class="row align-items-center">
+            <div class="col-md-6">
                 <h3>Nilai Kedisiplinan</h3>
                 <p class="text-subtitle text-muted">Laporan presensi pegawai UII</p>
             </div>
-            <div class="col-12 col-md-6 order-md-2 order-first">
-                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+            <div class="col-md-6 text-md-end">
+                <nav aria-label="breadcrumb" class="breadcrumb-header">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item active" aria-current="page">Presensi</li>
                     </ol>
@@ -15,104 +55,83 @@
         </div>
     </x-slot>
 
-    <html lang="en">
+    <div class="container py-4">
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <h4 class="card-title mb-4">Nilai Kedisiplinan</h4>
 
-    <head>
-        <meta charset="utf-8" />
-        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-        <title>Nilai Kedisiplinan</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet" />
-        <style>
-            body {
-                font-family: 'Inter', sans-serif;
-            }
-        </style>
-    </head>
+                <!-- Statistics Cards -->
+                <div class="row g-3 mb-4">
+                    @php
+                        $stats = [
+                            ['title' => 'Tidak Masuk', 'value' => '251 Hari', 'bg' => 'bg-danger', 'text' => 'text-white'],
+                            ['title' => 'Masuk Kerja', 'value' => '571 Hari', 'bg' => 'bg-success', 'text' => 'text-white'],
+                            ['title' => 'Izin Terlambat', 'value' => '1 Hari', 'bg' => 'bg-primary', 'text' => 'text-white'],
+                            ['title' => 'Izin Cuti', 'value' => '5 Hari', 'bg' => 'bg-warning', 'text' => 'text-dark'],
+                            ['title' => 'Izin Pulang Awal', 'value' => '0 Hari', 'bg' => 'bg-secondary', 'text' => 'text-white'],
+                            ['title' => 'T/PA (<15)', 'value' => '82 Hari', 'bg' => 'bg-danger', 'text' => 'text-white'],
+                        ];
+                    @endphp
 
-    <body class="bg-gray-100">
-        <div class="container mx-auto px-8 py-12">
-            <div class="bg-white shadow rounded-lg p-8 mb-8">
-                <h3 class="text-2xl font-semibold mb-6">Nilai Kedisiplinan</h3>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-6">
-                    <div class="bg-red-100 p-4 rounded-lg shadow">
-                        <h4 class="text-red-600 font-bold text-lg">Tidak Masuk</h4>
-                        <p class="text-red-600 font-semibold text-2xl">251 Hari</p>
-                    </div>
-                    <div class="bg-green-100 p-4 rounded-lg shadow">
-                        <h4 class="text-green-600 font-bold text-lg">Masuk Kerja</h4>
-                        <p class="text-green-600 font-semibold text-2xl">571 Hari</p>
-                    </div>
-                    <div class="bg-blue-100 p-4 rounded-lg shadow">
-                        <h4 class="text-blue-600 font-bold text-lg">Izin Terlambat</h4>
-                        <p class="text-blue-600 font-semibold text-2xl">1 Hari</p>
-                    </div>
-                    <div class="bg-yellow-100 p-4 rounded-lg shadow">
-                        <h4 class="text-yellow-600 font-bold text-lg">Izin Cuti</h4>
-                        <p class="text-yellow-600 font-semibold text-2xl">5 Hari</p>
-                    </div>
-                    <div class="bg-gray-100 p-4 rounded-lg shadow">
-                        <h4 class="text-gray-600 font-bold text-lg">Izin Pulang Awal</h4>
-                        <p class="text-gray-600 font-semibold text-2xl">0 Hari</p>
-                    </div>
-                    <div class="bg-red-200 p-4 rounded-lg shadow">
-                        <h4 class="text-red-800 font-bold text-lg">T/PA (< 15)</h4>
-                        <p class="text-red-800 font-semibold text-2xl">82 Hari</p>
-                    </div>
+                    @foreach ($stats as $stat)
+                        <div class="col-md-4 col-lg-2">
+                            <div class="card {{ $stat['bg'] }} h-100">
+                                <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                                    <h5 class="card-title text-center {{ $stat['text'] }} fw-bold">{{ $stat['title'] }}</h5>
+                                    <p class="card-text fs-4 text-center {{ $stat['text'] }} fw-bold">{{ $stat['value'] }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
 
-                <div class="flex justify-between items-center mb-4">
-                    <div class="flex space-x-4">
-                        <select class="border border-gray-300 rounded px-4 py-2">
+                <!-- Filters -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <select class="form-select">
                             <option>Semua jenis presensi pegawai</option>
                             <option>Administrasi</option>
                             <option>Dosen</option>
                         </select>
-                        <select class="border border-gray-300 rounded px-4 py-2">
+                    </div>
+                    <div class="col-md-6">
+                        <select class="form-select">
                             <option>Semua unit kerja</option>
                             <option>IT</option>
                             <option>HR</option>
                         </select>
                     </div>
-                    <div class="flex space-x-2">
-                        <button class="bg-blue-600 text-white px-4 py-2 rounded">Hari</button>
-                        <button class="bg-blue-600 text-white px-4 py-2 rounded">Bulan</button>
-                        <button class="bg-blue-600 text-white px-4 py-2 rounded">Tahun</button>
-                    </div>
                 </div>
 
-                <div class="overflow-x-auto">
-                    <table class="min-w-full border-collapse border border-gray-300">
-                        <thead>
-                            <tr class="bg-gray-200">
-                                <th class="p-4 border border-gray-300">No</th>
-                                <th class="text-left p-4 border border-gray-300">Nama</th>
-                                <th class="text-left p-4 border border-gray-300">Jam Masuk</th>
-                                <th class="text-left p-4 border border-gray-300">Jam Keluar</th>
-                                <th class="text-left p-4 border border-gray-300">Total Jam</th>
-                                <th class="text-left p-4 border border-gray-300">Poin</th>
-                                <th class="text-left p-4 border border-gray-300">Status</th>
-                                <th class="text-left p-4 border border-gray-300">Aksi</th>
+                <!-- Table -->
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="table-light">
+                            <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>Jam Masuk</th>
+                                <th>Jam Keluar</th>
+                                <th>Total Jam</th>
+                                <th>Poin</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
-                        <tbody class="text-gray-700">
+                        <tbody>
                             @foreach ($employee as $index => $pegawai)
-                                <tr class="border-b">
-                                    <td class="p-4 border border-gray-300">{{ $loop->iteration }}</td>
-                                    <td class="p-4 border border-gray-300">{{ $pegawai->name }}</td>
-                                    <td class="p-4 border border-gray-300">{{ $pegawai->jam_masuk }}</td>
-                                    <td class="p-4 border border-gray-300">{{ $pegawai->jam_keluar }}</td>
-                                    <td class="p-4 border border-gray-300">{{ $pegawai->total_jam }}</td>
-                                    <td class="p-4 border border-gray-300">{{ $pegawai->poin }}</td>
-                                    <td class="p-4 border border-gray-300">
-                                        <span class="px-2 py-1 rounded bg-green-100 text-green-800">{{ $pegawai->status }}</span>
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $pegawai->name }}</td>
+                                    <td>{{ $pegawai->jam_masuk }}</td>
+                                    <td>{{ $pegawai->jam_keluar }}</td>
+                                    <td>{{ $pegawai->total_jam }}</td>
+                                    <td>{{ $pegawai->poin }}</td>
+                                    <td>
+                                        <span class="badge bg-success">{{ $pegawai->status }}</span>
                                     </td>
-                                    <td class="p-4 border border-gray-300">
-                                        <div class="flex space-x-2">
-                                            <button class="text-blue-600"><i class="fas fa-eye"></i></button>
-                                        </div>
+                                    <td>
+                                        <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -120,12 +139,43 @@
                     </table>
                 </div>
 
-                <div class="mt-4">
-                    {{ $employee->links() }}
+                <!-- Pagination -->
+                <div class="d-flex justify-content-between align-items-center mt-4">
+                    <div>
+                        Menampilkan {{ $employee->firstItem() }} sampai {{ $employee->lastItem() }} dari total {{ $employee->total() }} data.
+                    </div>
+                    <div>
+                        @if ($employee->hasPages())
+                        <nav class="mt-4">
+                            <ul class="pagination justify-content-center">
+                                {{-- Tombol Previous --}}
+                                @if ($employee->onFirstPage())
+                                    <li class="page-item disabled"><span class="page-link">«</span></li>
+                                @else
+                                    <li class="page-item"><a class="page-link" href="{{ $employee->previousPageUrl() }}" rel="prev">«</a></li>
+                                @endif
+
+                                {{-- Nomor Halaman --}}
+                                @foreach ($employee->getUrlRange(1, $employee->lastPage()) as $page => $url)
+                                    @if ($page == $employee->currentPage())
+                                        <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
+                                    @else
+                                        <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
+                                    @endif
+                                @endforeach
+
+                                {{-- Tombol Next --}}
+                                @if ($employee->hasMorePages())
+                                    <li class="page-item"><a class="page-link" href="{{ $employee->nextPageUrl() }}" rel="next">»</a></li>
+                                @else
+                                    <li class="page-item disabled"><span class="page-link">»</span></li>
+                                @endif
+                            </ul>
+                        </nav>
+                    @endif
+                    </div>
                 </div>
             </div>
         </div>
-    </body>
-
-    </html>
+    </div>
 </x-app-layout>
