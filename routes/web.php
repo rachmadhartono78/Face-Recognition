@@ -48,17 +48,24 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::get('/dashbordmonitoring', [DashboardMonitoringController::class, 'index'])->name('dasbordmonitoring');;
     Route::get('/recorded-videos', [RecordedVideoController::class, 'index'])->name('recorded-videos');
     Route::get('/recorded-videos/{id}/playback', [PlaybackController::class, 'playback'])->name('recorded-videos.playback');
+    // Route::prefix('employee')->group(function () {
+    //     Route::get('/', [EmployeeController::class, 'getDataPegawai'])->name('employee');
+    //     Route::get('/{id}/edit', [EmployeeController::class, 'editEmployee'])->name('employee.edit');
+    //     Route::get('/{id}', [EmployeeController::class, 'showEmployee'])->name('employee.show');
+    //     Route::delete('/{id}', [EmployeeController::class, 'destroy'])->name('employee.destroy');
+    // });
     Route::prefix('employee')->group(function () {
         Route::get('/', [EmployeeController::class, 'getDataPegawai'])->name('employee');
-        Route::get('/{id}/edit', [EmployeeController::class, 'editEmployee'])->name('users.edit');
-        Route::get('/{id}', [EmployeeController::class, 'showEmployee'])->name('users.show');
-        Route::delete('/{id}', [EmployeeController::class, 'destroy'])->name('users.destroy');
+        Route::get('/{id}/edit', [EmployeeController::class, 'editEmployee'])->name('employee.edit');
+        Route::get('/{id}', [EmployeeController::class, 'showEmployee'])->name('employe.show');
+        Route::delete('/{id}', [EmployeeController::class, 'destroy'])->name('employee.destroy');
     });
+    
     Route::get('/live-monitoring', [StreamingController::class, 'startStreaming'])->name('live-monitoring');
     Route::get('/discipline-reports', [KeyPerformanceKpiReportController::class, 'index'])->name('discipline-reports');
     Route::get('/start-streaming', [StreamingController::class, 'startStreaming'])->name('start.streaming');
     Route::get('/attendance', [StreamingController::class, 'getAttendance'])->name('get.attendance');
-    Route::get('/employee', [EmployeeController::class, 'getDataPegawai'])->name('employee');
+    // Route::get('/employee', [EmployeeController::class, 'getDataPegawai'])->name('employee');
     Route::post('/presensi/filter', [EmployeeController::class, 'getDataPegawai'])->name('presensi.filter');
     Route::get('/employee-presence', [EmployeePresenceController::class, 'index'])->name('employee-presence');
     Route::get('/attendance-monitoring', [AttendanceMonitoringController::class, 'index'])->name('attendance-monitoring');

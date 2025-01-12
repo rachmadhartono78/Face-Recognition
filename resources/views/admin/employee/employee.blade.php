@@ -1,49 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
-        <head>
-            <style>
-                .pagination {
-                    display: flex;
-                    list-style: none;
-                    padding: 0;
-                    margin: 0;
-                }
-    
-                .pagination .page-item {
-                    margin: 0 5px;
-                }
-    
-                .pagination .page-link {
-                    padding: 8px 12px;
-                    border: 1px solid #ddd;
-                    border-radius: 4px;
-                    text-decoration: none;
-                    color: #007bff;
-                }
-    
-                .pagination .page-link:hover {
-                    background-color: #007bff;
-                    color: white;
-                }
-    
-                .pagination .page-item.active .page-link {
-                    background-color: #007bff;
-                    color: white;
-                    border-color: #007bff;
-                }
-    
-                .pagination .page-item.disabled .page-link {
-                    color: #6c757d;
-                    pointer-events: none;
-                    background-color: #f8f9fa;
-                }
-            </style>
-        </head>
-        
         <div class="row align-items-center">
             <div class="col-md-6">
                 <h3>Kelola Pengguna</h3>
-                <p class="text-subtitle text-muted">Manajemen data pengguna presensi.</p>
+                <p class="text-subtitle text-muted">Manajemen data pengguna presensi & Monitoring Pegawai.</p>
             </div>
             <div class="col-md-6 text-md-end">
                 <nav aria-label="breadcrumb" class="breadcrumb-header">
@@ -62,20 +22,21 @@
             <div class="card-body">
                 <form method="GET" action="{{ route('employee') }}" class="row g-3">
                     <div class="col-md-4">
-                        <label for="type_presence" class="form-label">Jenis Presensi Pegawai</label>
-                        <select name="type_presence" id="type_presence" class="form-select">
+                        <label for="jenis_presensi" class="form-label">Jenis Presensi</label>
+                        <select name="jenis_presensi" id="jenis_presensi" class="form-select">
                             <option value="">-- Pilih --</option>
                             <option value="Administrasi">Administrasi</option>
-                            <option value="Dosen Tetap">Dosen Tetap</option>
-                            <option value="Dosen Paruh Waktu">Dosen Paruh Waktu</option>
+                            <option value="Dosen tetap">Dosen tetap</option>
+                            <option value="Dosen kontrak">Dosen kontrak</option>
+                            <option value="Tenaga pendukung">Tenaga pendukung</option>
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <label for="work_unit" class="form-label">Unit Kerja</label>
-                        <select name="work_unit" id="work_unit" class="form-select">
+                        <label for="unit_kerja" class="form-label">Unit Kerja</label>
+                        <select name="unit_kerja" id="unit_kerja" class="form-select">
                             <option value="">-- Pilih --</option>
+                            <option value="Badan Sistem Informasi">Badan Sistem Informasi</option>
                             <option value="Fakultas Hukum">Fakultas Hukum</option>
-                            <option value="Arsitektur S1">Arsitektur S1</option>
                         </select>
                     </div>
                     <div class="col-md-4">
@@ -100,76 +61,65 @@
                     <table class="table table-bordered table-striped">
                         <thead class="table-light">
                             <tr>
-                                <th><input type="checkbox" /></th>
                                 <th>No</th>
+                                <th>NIP</th>
                                 <th>Nama</th>
-                                <th>Jabatan</th>
-                                <th>Email</th>
+                                <th>Jenis Presensi</th>
+                                <th>Unit Kerja</th>
+                                <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($users as $index => $user)
                                 <tr>
-                                    <td><input type="checkbox" /></td>
                                     <td>{{ $loop->iteration + ($users->currentPage() - 1) * $users->perPage() }}</td>
-                                    <td>{{ $user->nama_karyawan }}</td>
-                                    <td>{{ $user->jabatan }}</td>
-                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->nip }}</td>
+                                    <td>{{ $user->nama }}</td>
+                                    <td>{{ $user->jenis_presensi }}</td>
+                                    <td>{{ $user->unit_kerja }}</td>
+                                    <td>{{ $user->flag_aktif ? 'Aktif' : 'Nonaktif' }}</td>
                                     <td>
                                         <div class="d-flex gap-2">
-                                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
-                                            <a href="{{ route('users.show', $user->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
-                                            <form method="POST" action="{{ route('users.destroy', $user->id) }}">
+                                            <!-- Edit -->
+                                            {{-- <a href="{{ route('employee.edit', ['id' => $user->id]) }}" class="btn btn-warning btn-sm"> --}}
+                                            <a href="{{ route('employee', ['id' => $user->id]) }}" class="btn btn-warning btn-sm">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+
+                                            <!-- View -->
+                                            {{-- <a href="{{ route('employee.show', ['id' => $user->id]) }}" class="btn btn-primary btn-sm"> --}}
+                                            <a href="{{ route('employee', ['id' => $user->id]) }}" class="btn btn-primary btn-sm">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+
+                                            <!-- Delete -->
+                                            {{-- <form method="POST" action="{{ route('employee.destroy', ['id' => $user->id]) }}"> --}}
+                                            <form method="POST" action="{{ route('employee', ['id' => $user->id]) }}">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
                                             </form>
                                         </div>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6" class="text-center text-muted">Tidak ada data pegawai tersedia.</td>
+                                    <td colspan="7" class="text-center text-muted">Tidak ada data pengguna tersedia.</td>
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
                 </div>
+                <!-- Pagination -->
                 <div class="mt-4 d-flex justify-content-between align-items-center">
                     <div>
                         Menampilkan {{ $users->firstItem() }} sampai {{ $users->lastItem() }} dari total {{ $users->total() }} data.
                     </div>
-                    <div class="pagination-wrapper">
-                        {{-- {{ $users->links() }} --}}
-                        @if ($users->hasPages())
-                        <nav class="mt-4">
-                            <ul class="pagination justify-content-center">
-                                {{-- Tombol Previous --}}
-                                @if ($users->onFirstPage())
-                                    <li class="page-item disabled"><span class="page-link">«</span></li>
-                                @else
-                                    <li class="page-item"><a class="page-link" href="{{ $users->previousPageUrl() }}" rel="prev">«</a></li>
-                                @endif
-
-                                {{-- Nomor Halaman --}}
-                                @foreach ($users->getUrlRange(1, $users->lastPage()) as $page => $url)
-                                    @if ($page == $users->currentPage())
-                                        <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
-                                    @else
-                                        <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
-                                    @endif
-                                @endforeach
-
-                                {{-- Tombol Next --}}
-                                @if ($users->hasMorePages())
-                                    <li class="page-item"><a class="page-link" href="{{ $users->nextPageUrl() }}" rel="next">»</a></li>
-                                @else
-                                    <li class="page-item disabled"><span class="page-link">»</span></li>
-                                @endif
-                            </ul>
-                        </nav>
-                    @endif
+                    <div>
+                        {{ $users->appends(request()->query())->links('pagination::bootstrap-4') }}
                     </div>
                 </div>
             </div>

@@ -9,6 +9,6 @@ class Employee extends Model
 {
     use HasFactory;
 
-    protected $table = 'karyawan'; 
-    protected $fillable = ['nama_karyawan', 'jabatan', 'email', 'tempat_lahir', 'tanggal_lahir', 'nomor_hp'];
+    protected $table = 'pengguna'; 
+    protected $fillable = ['nama', 'nip', 'jenis_presensi', 'unit_kerja', 'foto', 'flag_aktif'];
 }

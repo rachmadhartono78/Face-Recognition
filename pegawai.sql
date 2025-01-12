@@ -11,7 +11,7 @@
  Target Server Version : 100432 (10.4.32-MariaDB)
  File Encoding         : 65001
 
- Date: 12/01/2025 10:24:05
+ Date: 12/01/2025 21:01:43
 */
 
 SET NAMES utf8mb4;
@@ -34,9 +34,5 @@ CREATE TABLE `pegawai`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uniq_nip`(`nip` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of pegawai
--- ----------------------------
 
 SET FOREIGN_KEY_CHECKS = 1;
