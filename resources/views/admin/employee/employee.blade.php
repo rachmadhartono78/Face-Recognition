@@ -6,9 +6,10 @@
                 <p class="text-subtitle text-muted">Manajemen data pengguna presensi & Monitoring Pegawai.</p>
             </div>
             <div class="col-md-6 text-md-end">
-                <nav aria-label="breadcrumb" class="breadcrumb-header">
+                {{-- <nav aria-label="breadcrumb" class="breadcrumb-header"> --}}
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Presensi</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Kelola Pengguna</li>
                     </ol>
                 </nav>
@@ -35,8 +36,11 @@
                         <label for="unit_kerja" class="form-label">Unit Kerja</label>
                         <select name="unit_kerja" id="unit_kerja" class="form-select">
                             <option value="">-- Pilih --</option>
+                            <option value="Badan Sistem Informasi">Direktorat Layanan Akademik</option>
                             <option value="Badan Sistem Informasi">Badan Sistem Informasi</option>
-                            <option value="Fakultas Hukum">Fakultas Hukum</option>
+                            <option value="Badan Sistem Informasi">Direktorat Sumber Daya Manusia</option>
+                            <option value="Fakultas Teknologi Informasi">Fakultas Teknologi Informasi</option>
+
                         </select>
                     </div>
                     <div class="col-md-4">

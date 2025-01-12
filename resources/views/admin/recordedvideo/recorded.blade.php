@@ -1,6 +1,5 @@
 <x-app-layout>
     <x-slot name="header"></x-slot>
-
     <div class="page-heading">
         <div class="page-title">
             <div class="row">

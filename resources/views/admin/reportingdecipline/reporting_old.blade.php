@@ -2,13 +2,13 @@
     <x-slot name="header">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Halaman Laporan KPI</h3>
-                <p class="text-subtitle text-muted">Laporan KPI.</p>
+                <h3>Laporan Nilai Kedisiplinan Pegawai</h3>
+                <p class="text-subtitle text-muted">Laporan Nilai Kedisiplinan Pegawai .</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page">Laporan KPI</li>
+                        <li class="breadcrumb-item active" aria-current="page">Laporan Nilai Kedisiplinan Pegawai</li>
                     </ol>
                 </nav>
             </div>
@@ -20,7 +20,7 @@
         <meta charset="utf-8" />
         <meta content="width=device-width, initial-scale=1.0" name="viewport" />
         <title>
-            Laporan KPI
+            Laporan Nilai Kedisiplinan Pegawai
         </title>
         <script src="https://cdn.tailwindcss.com">
         </script>
@@ -49,7 +49,7 @@
             </div>
             <div class="bg-white shadow rounded-lg p-8 mb-8">
                 <h3 class="text-2xl font-semibold mb-6">
-                    Laporan Key Performance Indicator
+                    Laporan Nilai Kedisiplinan Pegawai
                 </h3>
                 <h3 class="text-xl mb-4">
                     Bulan November 2023

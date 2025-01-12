@@ -74,17 +74,13 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
         Route::get('special-working-hours', [SettingsController::class, 'specialWorkingHours'])->name('settings.special-working-hours');
         Route::get('leave-types', [SettingsController::class, 'leaveTypes'])->name('settings.leave-types');
         Route::get('holidays', [SettingsController::class, 'holidays'])->name('settings.holidays');
+        Route::get('criteria', [SettingsController::class, 'criteria'])->name('settings.criteria');
     });
     Route::get('/help', [HelpController::class, 'index'])->name('help');
+    Route::get('/presensi', [EmployeePresenceController::class, 'index'])->name('employee-presence.index');
 
+    Route::put('/presensi/{id}', [EmployeePresenceController::class, 'update'])->name('employee-presence.update');
+    Route::get('/presensi', [EmployeePresenceController::class, 'index'])->name('employee-presence.index');
 
-    Route::get('/presensi', function () {
-        return view('presensi.presensi', [
-            'selectOptions' => $selectOptions,
-            'dataUnit' => $dataUnit,
-            'dataTypePresence' => $dataTypePresence,
-            'pageNumber' => $pageNumber
-        ]);
-    });
 });
 
