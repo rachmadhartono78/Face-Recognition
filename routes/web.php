@@ -10,6 +10,7 @@ use App\Http\Controllers\DashboardMonitoringController;
 use App\Http\Controllers\RecordedVideoController;
 use App\Http\Controllers\StreamingController;
 use App\Http\Controllers\PlaybackController;
+use App\Http\Controllers\HelpController;
 
 
 /*
@@ -44,23 +45,9 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::get('/monitoring', function () {
         return view('admin.livemonitoring.monitoring');
     })->name('monitoring');
-    Route::get('/dashbordmonitoring', [DashboardMonitoringController::class, 'index'])->name('dasbordmonitoring');
-
-    Route::get('/reportingkpi', function () {
-        $data = KeyPerformanceKpiReport::all();
-        return view('admin.reportingkpi.reporting', ['data' => $data]);
-    })->name('kpi-reports');
-
+    Route::get('/dashbordmonitoring', [DashboardMonitoringController::class, 'index'])->name('dasbordmonitoring');;
     Route::get('/recorded-videos', [RecordedVideoController::class, 'index'])->name('recorded-videos');
-    // Route::get('/recorded-videos/{id}/playback', [RecordedVideoController::class, 'playback'])->name('recorded-videos.playback');
     Route::get('/recorded-videos/{id}/playback', [PlaybackController::class, 'playback'])->name('recorded-videos.playback');
-    // Route::get('/recorded-videos/{id}/playback', [PlaybackController::class, 'playback'])->name('recorded-videos.index');
-    
-    // Route::get('/recorded-videos/{id}/playback', [PlaybackController::class, 'playback'])->name('recorded-videos.playback');
-
-    // Route::get('/playback/{id}', [PlaybackController::class, 'show'])->name('playback.show');
-    Route::get('/kpi-reports', [KeyPerformanceKpiReportController::class, 'index'])->name('kpi-reports');
-    // Route::get('/employee', [EmployeeController::class, 'getDataPegawai'])->name('employee');
     Route::prefix('employee')->group(function () {
         Route::get('/', [EmployeeController::class, 'getDataPegawai'])->name('employee');
         Route::get('/{id}/edit', [EmployeeController::class, 'editEmployee'])->name('users.edit');
@@ -74,15 +61,15 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::get('/employee', [EmployeeController::class, 'getDataPegawai'])->name('employee');
     Route::post('/presensi/filter', [EmployeeController::class, 'getDataPegawai'])->name('presensi.filter');
     Route::get('/employee-presence', [EmployeePresenceController::class, 'index'])->name('employee-presence');
-
     Route::get('/attendance-monitoring', [AttendanceMonitoringController::class, 'index'])->name('attendance-monitoring');
-
     Route::prefix('settings')->group(function () {
         Route::get('attendance-types', [SettingsController::class, 'attendanceTypes'])->name('settings.attendance-types');
         Route::get('special-working-hours', [SettingsController::class, 'specialWorkingHours'])->name('settings.special-working-hours');
         Route::get('leave-types', [SettingsController::class, 'leaveTypes'])->name('settings.leave-types');
         Route::get('holidays', [SettingsController::class, 'holidays'])->name('settings.holidays');
     });
+    Route::get('/help', [HelpController::class, 'index'])->name('help');
+
 
     Route::get('/presensi', function () {
         return view('presensi.presensi', [

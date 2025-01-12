@@ -16,6 +16,7 @@
     <x-maz-sidebar-sub-item name="Jenis Izin" :link="route('settings.leave-types')" icon="bi bi-file-earmark-text"></x-maz-sidebar-sub-item>
     <x-maz-sidebar-sub-item name="Hari Libur" :link="route('settings.holidays')" icon="bi bi-calendar-event"></x-maz-sidebar-sub-item>
     </x-maz-sidebar-item>
+    <x-maz-sidebar-item name="Bantuan" :link="route('help')" icon="bi bi-question-circle"></x-maz-sidebar-item>
 
 
 </x-maz-sidebar>
