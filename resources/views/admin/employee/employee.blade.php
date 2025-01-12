@@ -19,7 +19,7 @@
     <div class="container mx-auto px-8 py-12">
         <!-- Filter Section -->
         <div class="bg-white shadow rounded-lg p-6 mb-6">
-            <form method="GET" action="{{ route('users.index') }}" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <form method="GET" action="{{ route('employee') }}" class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
                     <label for="type_presence" class="block text-sm font-medium">Jenis Presensi Pegawai</label>
                     <select name="type_presence" id="type_presence" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
@@ -41,9 +41,13 @@
                 <div>
                     <label for="status" class="block text-sm font-medium">Status</label>
                     <select name="status" id="status" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                        <option value="">-- Pilih --</option>
                         <option value="Aktif">Aktif</option>
                         <option value="Nonaktif">Nonaktif</option>
                     </select>
+                </div>
+                <div class="col-span-3">
+                    <button type="submit" class="btn btn-primary w-full">Filter</button>
                 </div>
             </form>
         </div>
@@ -57,33 +61,36 @@
                             <th class="p-4 border border-gray-300"><input type="checkbox" /></th>
                             <th class="text-left p-4 border border-gray-300">No</th>
                             <th class="text-left p-4 border border-gray-300">Nama</th>
-                            <th class="text-left p-4 border border-gray-300">NIK</th>
-                            <th class="text-left p-4 border border-gray-300">Jenis Presensi Pegawai</th>
-                            <th class="text-left p-4 border border-gray-300">Unit Kerja</th>
+                            <th class="text-left p-4 border border-gray-300">Jabatan</th>
+                            <th class="text-left p-4 border border-gray-300">Email</th>
                             <th class="text-left p-4 border border-gray-300">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $index => $user)
+                        @forelse ($users as $index => $user)
                             <tr class="border-b">
                                 <td class="p-4 border border-gray-300"><input type="checkbox" /></td>
                                 <td class="p-4 border border-gray-300">{{ $loop->iteration }}</td>
-                                <td class="p-4 border border-gray-300">{{ $user->name }}</td>
-                                <td class="p-4 border border-gray-300">{{ $user->nik }}</td>
-                                <td class="p-4 border border-gray-300">{{ $user->type_presence }}</td>
-                                <td class="p-4 border border-gray-300">{{ $user->work_unit }}</td>
+                                <td class="p-4 border border-gray-300">{{ $user->nama_karyawan }}</td>
+                                <td class="p-4 border border-gray-300">{{ $user->jabatan }}</td>
+                                <td class="p-4 border border-gray-300">{{ $user->email }}</td>
                                 <td class="p-4 border border-gray-300">
                                     <div class="flex space-x-2">
                                         <a href="{{ route('users.edit', $user->id) }}" class="text-blue-600"><i class="fas fa-edit"></i></a>
                                         <a href="{{ route('users.show', $user->id) }}" class="text-blue-600"><i class="fas fa-eye"></i></a>
-                                        <label class="switch">
-                                            <input type="checkbox" {{ $user->status == 'Aktif' ? 'checked' : '' }}>
-                                            <span class="slider round"></span>
-                                        </label>
+                                        <form method="POST" action="{{ route('users.destroy', $user->id) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-600"><i class="fas fa-trash"></i></button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="6" class="text-center text-gray-500 py-4">Tidak ada data pegawai tersedia.</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

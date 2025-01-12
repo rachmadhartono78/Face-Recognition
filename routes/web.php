@@ -9,6 +9,8 @@ use App\Http\Controllers\EmployeePresenceController;
 use App\Http\Controllers\DashboardMonitoringController;
 use App\Http\Controllers\RecordedVideoController;
 use App\Http\Controllers\StreamingController;
+use App\Http\Controllers\PlaybackController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -48,11 +50,23 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
         $data = KeyPerformanceKpiReport::all();
         return view('admin.reportingkpi.reporting', ['data' => $data]);
     })->name('kpi-reports');
-    
+
     Route::get('/recorded-videos', [RecordedVideoController::class, 'index'])->name('recorded-videos');
-    Route::get('/recorded-videos/{id}/playback', [RecordedVideoController::class, 'playback'])->name('recorded-videos.playback');
+    // Route::get('/recorded-videos/{id}/playback', [RecordedVideoController::class, 'playback'])->name('recorded-videos.playback');
+    Route::get('/recorded-videos/{id}/playback', [PlaybackController::class, 'playback'])->name('recorded-videos.playback');
+    // Route::get('/recorded-videos/{id}/playback', [PlaybackController::class, 'playback'])->name('recorded-videos.index');
+    
+    // Route::get('/recorded-videos/{id}/playback', [PlaybackController::class, 'playback'])->name('recorded-videos.playback');
+
+    // Route::get('/playback/{id}', [PlaybackController::class, 'show'])->name('playback.show');
     Route::get('/kpi-reports', [KeyPerformanceKpiReportController::class, 'index'])->name('kpi-reports');
-    Route::get('/employee', [EmployeeController::class, 'getDataPegawai'])->name('employee');
+    // Route::get('/employee', [EmployeeController::class, 'getDataPegawai'])->name('employee');
+    Route::prefix('employee')->group(function () {
+        Route::get('/', [EmployeeController::class, 'getDataPegawai'])->name('employee');
+        Route::get('/{id}/edit', [EmployeeController::class, 'editEmployee'])->name('users.edit');
+        Route::get('/{id}', [EmployeeController::class, 'showEmployee'])->name('users.show');
+        Route::delete('/{id}', [EmployeeController::class, 'destroy'])->name('users.destroy');
+    });
     Route::get('/live-monitoring', [StreamingController::class, 'startStreaming'])->name('live-monitoring');
     Route::get('/discipline-reports', [KeyPerformanceKpiReportController::class, 'index'])->name('discipline-reports');
     Route::get('/start-streaming', [StreamingController::class, 'startStreaming'])->name('start.streaming');
