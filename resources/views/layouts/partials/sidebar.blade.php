@@ -3,6 +3,7 @@
     <x-maz-sidebar-item name="Dashboard" :link="route('dasbordmonitoring')" icon="bi bi-grid-fill"></x-maz-sidebar-item>
     <x-maz-sidebar-item name="Presensi & Kedisiplinan" icon="bi bi-clock-history">
     <x-maz-sidebar-sub-item name="Presensi Pegawai" :link="route('employee-presence')" icon="bi bi-person-check-fill"></x-maz-sidebar-sub-item>
+    <x-maz-sidebar-sub-item name="Nilai Kedisiplinan Harian Pegawai" :link="route('nilai-kedisiplinan.index')" icon="bi bi-file-bar-graph"></x-maz-sidebar-sub-item>
     <x-maz-sidebar-sub-item name="Nilai Kedisiplinan" :link="route('discipline-reports')" icon="bi bi-file-bar-graph"></x-maz-sidebar-sub-item>
     {{-- <x-maz-sidebar-sub-item name="Monitoring Kehadiran" :link="route('attendance-monitoring')" icon="bi bi-calendar-check-fill"></x-maz-sidebar-sub-item> --}}
     </x-maz-sidebar-item>

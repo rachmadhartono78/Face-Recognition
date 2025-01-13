@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendanceMonitoringController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\Streaming;
 use Illuminate\Support\Facades\Route;
@@ -11,7 +12,8 @@ use App\Http\Controllers\RecordedVideoController;
 use App\Http\Controllers\StreamingController;
 use App\Http\Controllers\PlaybackController;
 use App\Http\Controllers\HelpController;
-
+use App\Http\Controllers\NilaiKedisiplinanController;
+use App\Http\Controllers\SettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +48,8 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
         return view('admin.livemonitoring.monitoring');
     })->name('monitoring');
     Route::get('/dashbordmonitoring', [DashboardMonitoringController::class, 'index'])->name('dasbordmonitoring');;
+    Route::get('/nilai-kedisiplinan', [NilaiKedisiplinanController::class, 'index'])->name('nilai-kedisiplinan.index');
+    // Route::get('/nilai-kedisiplinan', [DashboardMonitoringController::class, 'index'])->name('nilai_kedisiplinan');
     Route::get('/recorded-videos', [RecordedVideoController::class, 'index'])->name('recorded-videos');
     Route::get('/recorded-videos/{id}/playback', [PlaybackController::class, 'playback'])->name('recorded-videos.playback');
     // Route::prefix('employee')->group(function () {

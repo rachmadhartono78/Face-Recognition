@@ -24,6 +24,6 @@ class PresensiHarianPegawai extends Model
     // Relasi ke model `Pengguna` (opsional)
     public function pengguna()
     {
-        return $this->belongsTo(Pengguna::class, 'pengguna_id');
+        return $this->belongsTo(Employee::class, 'pengguna_id');
     }
 }
