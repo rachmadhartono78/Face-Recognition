@@ -79,6 +79,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
         Route::get('leave-types', [SettingsController::class, 'leaveTypes'])->name('settings.leave-types');
         Route::get('holidays', [SettingsController::class, 'holidays'])->name('settings.holidays');
         Route::get('criteria', [SettingsController::class, 'criteria'])->name('settings.criteria');
+        Route::get('discipline-reports', [SettingsController::class, 'disciplineReports'])->name('settings.descipline-reports');
     });
     Route::get('/help', [HelpController::class, 'index'])->name('help');
     Route::get('/presensi', [EmployeePresenceController::class, 'index'])->name('employee-presence.index');

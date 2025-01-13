@@ -1,15 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="row">
-            <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Nilai Kedisiplinan Pegawai</h3>
-                {{-- <p class="text-subtitle text-muted">Laporan KPI.</p> --}}
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h3>Pengaturan Laporan Kedisiplinan</h3>
+                <p class="text-subtitle text-muted">Mengelola laporan kedisiplinan berdasarkan aturan kerja.</p>
             </div>
-            <div class="col-12 col-md-6 order-md-2 order-first">
+            <div class="col-md-6 text-md-end">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Nilai Kedisiplinan Pegawai</li>
+                        <li class="breadcrumb-item active" aria-current="page">Laporan Kedisiplinan</li>
                     </ol>
                 </nav>
             </div>
@@ -17,21 +17,11 @@
     </x-slot>
 
     <div class="container py-4">
-        <!-- Header Laporan -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <a href="#" class="btn btn-secondary">
-                <i class="fas fa-arrow-left me-2"></i>Kembali
-            </a>
-            <button class="btn btn-primary">
-                <i class="fas fa-print me-2"></i>Print Laporan
-            </button>
-        </div>
-
-        <!-- Tabel Laporan -->
+        <!-- Table -->
         <div class="card shadow-sm">
             <div class="card-body">
-                <h4 class="card-title">Laporan Key Performance Indicator</h4>
-                <p class="card-text">Bulan November 2023</p>
+                <h4 class="card-title">Laporan Kedisiplinan Pegawai</h4>
+                <p class="card-text">Berikut adalah daftar laporan kedisiplinan pegawai:</p>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead class="table-light">
@@ -44,25 +34,38 @@
                                 <th>Tepat Waktu</th>
                                 <th>Terlambat</th>
                                 <th>Tidak Hadir</th>
+                                <th>Durasi Tidak Terlihat (Menit)</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($reports as $report)
+                            @forelse ($reports as $report)
                                 <tr>
                                     <td>{{ $report->nama_karyawan }}</td>
-                                    <td>{{ $report->NIP }}</td>
+                                    <td>{{ $report->nip }}</td>
                                     <td>{{ $report->jabatan }}</td>
                                     <td>{{ $report->total_jam_kerja }} Jam</td>
                                     <td>{{ $report->total_kehadiran }} Hari</td>
                                     <td>{{ $report->tepat_waktu }} Hari</td>
                                     <td>{{ $report->terlambat }} Hari</td>
                                     <td>{{ $report->tidak_hadir }} Hari</td>
-                                    <td>{{ $report->efektivitas }}%</td>
-                                    <td>{{ $report->kinerja }}</td>
+                                    <td>{{ $report->durasi_tidak_terlihat }} Menit</td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="9" class="text-center">Tidak ada data kedisiplinan yang tersedia.</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
+                </div>
+                <!-- Pagination -->
+                <div class="mt-4 d-flex justify-content-between align-items-center">
+                    <div>
+                        Menampilkan {{ $reports->firstItem() }} sampai {{ $reports->lastItem() }} dari total {{ $reports->total() }} data.
+                    </div>
+                    <div>
+                        {{ $reports->links('pagination::bootstrap-4') }}
+                    </div>
                 </div>
             </div>
         </div>

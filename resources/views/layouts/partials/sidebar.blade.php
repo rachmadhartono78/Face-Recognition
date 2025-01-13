@@ -17,6 +17,8 @@
     <x-maz-sidebar-sub-item name="Jenis Izin" :link="route('settings.leave-types')" icon="bi bi-file-earmark-text"></x-maz-sidebar-sub-item>
     <x-maz-sidebar-sub-item name="Hari Libur" :link="route('settings.holidays')" icon="bi bi-calendar-event"></x-maz-sidebar-sub-item>
     <x-maz-sidebar-sub-item name="Kriteria Kedisiplinan" :link="route('settings.criteria')" icon="bi bi-calendar-event"></x-maz-sidebar-sub-item>
+    <x-maz-sidebar-sub-item name="Pengaaturan Laporan Kedisiplinan" :link="route('settings.descipline-reports')" icon="fas fa-file-alt"></x-maz-sidebar-sub-item>
+
     </x-maz-sidebar-item>
     <x-maz-sidebar-item name="Bantuan" :link="route('help')" icon="bi bi-question-circle"></x-maz-sidebar-item>
 
