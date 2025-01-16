@@ -13,6 +13,7 @@ use App\Http\Controllers\StreamingController;
 use App\Http\Controllers\PlaybackController;
 use App\Http\Controllers\HelpController;
 use App\Http\Controllers\NilaiKedisiplinanController;
+use App\Http\Controllers\PengaturanController;
 use App\Http\Controllers\SettingsController;
 
 /*
@@ -73,6 +74,18 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::post('/presensi/filter', [EmployeeController::class, 'getDataPegawai'])->name('presensi.filter');
     Route::get('/employee-presence', [EmployeePresenceController::class, 'index'])->name('employee-presence');
     Route::get('/attendance-monitoring', [AttendanceMonitoringController::class, 'index'])->name('attendance-monitoring');
+    Route::resource('pengaturan', \App\Http\Controllers\PengaturanController::class);
+    // Route::get('/pengaturan', [PengaturanController::class, 'index'])->name('pengaturan');
+    Route::prefix('pengaturan')->middleware('auth')->group(function () {
+        Route::get('/', [PengaturanController::class, 'index'])->name('pengaturan.index');
+        Route::get('/create', [PengaturanController::class, 'create'])->name('pengaturan.create');
+        Route::post('/', [PengaturanController::class, 'store'])->name('pengaturan.store');
+        Route::get('/{id}/edit', [PengaturanController::class, 'edit'])->name('pengaturan.edit');
+        Route::put('/{id}', [PengaturanController::class, 'update'])->name('pengaturan.update');
+        Route::delete('/{id}', [PengaturanController::class, 'destroy'])->name('pengaturan.destroy');
+    });
+    
+
     Route::prefix('settings')->group(function () {
         Route::get('attendance-types', [SettingsController::class, 'attendanceTypes'])->name('settings.attendance-types');
         Route::get('special-working-hours', [SettingsController::class, 'specialWorkingHours'])->name('settings.special-working-hours');
@@ -81,6 +94,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
         Route::get('criteria', [SettingsController::class, 'criteria'])->name('settings.criteria');
         Route::get('discipline-reports', [SettingsController::class, 'disciplineReports'])->name('settings.descipline-reports');
     });
+    // Route::resource('pengaturan', \App\Http\Controllers\PengaturanController::class);
     Route::get('/help', [HelpController::class, 'index'])->name('help');
     Route::get('/presensi', [EmployeePresenceController::class, 'index'])->name('employee-presence.index');
 
