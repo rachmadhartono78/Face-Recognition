@@ -48,7 +48,8 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::get('/monitoring', function () {
         return view('admin.livemonitoring.monitoring');
     })->name('monitoring');
-    Route::get('/dashbordmonitoring', [DashboardMonitoringController::class, 'index'])->name('dasbordmonitoring');;
+    Route::get('/dashbordmonitoring', [NilaiKedisiplinanController::class, 'index'])->name('nilai-kedisiplinan.index');
+    // Route::get('/dashbordmonitoring', [DashboardMonitoringController::class, 'index'])->name('dasbordmonitoring');
     Route::get('/nilai-kedisiplinan', [NilaiKedisiplinanController::class, 'index'])->name('nilai-kedisiplinan.index');
     // Route::get('/nilai-kedisiplinan', [DashboardMonitoringController::class, 'index'])->name('nilai_kedisiplinan');
     Route::get('/recorded-videos', [RecordedVideoController::class, 'index'])->name('recorded-videos');
