@@ -424,19 +424,23 @@
 <body class="antialiased">
     <div class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
+            <div class="text-center mb-4">
+                <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-100">Selamat Datang di UIIDashy</h1>
+            </div>
+
             <div class="flex flex-col items-center">
                 <img alt="Universitas Islam Indonesia" class="mx-auto mb-2" height="100"
                     src="{{ asset('images/logo/logo.png') }}" />
             </div>
             @if (Route::has('login'))
-            <div class="mt-6">
+            <div class="mt-6 flex justify-center">
                 @auth
-                <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 underline">Dashboard</a>
+                <a href="{{ url('/dashboard') }}" class="underline text-3xl font-bold text-gray-800 dark:text-gray-100">Dashboard</a>
                 @else
-                <a href="{{ route('login') }}" class="btn-login">Login</a>
+                <a href="{{ route('login') }}" class="underline btn-login text-3xl font-bold text-gray-800 dark:text-gray-100">Login</a>
 
                 @if (Route::has('register'))
-                <a href="{{ route('register') }}" class="ml-4 btn-register">Register</a>
+                <a href="{{ route('register') }}" class="underline ml-4 btn-register text-3xl font-bold text-gray-800 dark:text-gray-100">Register</a>
                 @endif
                 @endauth
                 @endif
