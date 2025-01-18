@@ -40,9 +40,12 @@
                     {{ $slot }}
                 </div>
                 <div class="col-lg-7 d-none d-lg-block">
-                    <div id="auth-right" class="h-100 d-flex justify-content-center align-items-center">
+                    {{-- <div id="auth-right" class="h-100 d-flex justify-content-center align-items-center">
                         <img src="{{ asset('images/uii-campus.jpg') }}" alt="Authentication Image" class="img-fluid">
-                    </div>
+                    </div> --}}
+                    <div id="auth-right" class="h-100 d-flex justify-content-center align-items-center" 
+                     style="background-image: url('{{ asset('images/uii-campus.jpg') }}'); background-size: cover; background-position: center;">
+                </div>
                 </div>
             </div>
         </div>
