@@ -4,7 +4,7 @@
         <div class="auth-logo">
             <a href="index.html"><img src="{{ asset('/images/logo/logo.png') }}" alt="Logo"></a>
         </div>
-        <h3 class="auth-title">Log in.</h3>
+        <h3 class="auth-title">Log in UII Dashy</h3>
         <p class="auth-subtitle mb-5">your data will be safe.</p>
 
         @if (session('status'))
