@@ -17,7 +17,7 @@
         <!-- Styles and Script -->
         @vite(["resources/css/app.css", "resources/sass/bootstrap.scss", "resources/sass/themes/dark/app-dark.scss", "resources/sass/app.scss", "resources/sass/pages/auth.scss", "resources/js/app.js"])
 
-    </head>
+    {{-- </head>
     <body>
         <div id="auth">
             <div class="row h-100">
@@ -28,6 +28,24 @@
                     <div id="auth-right">
 
                     </div>
+                </div>
+            </div>
+        </div>
+    </body> --}}
+
+    <body>
+        <div id="auth">
+            <div class="row h-100">
+                <div class="col-lg-5 col-12">
+                    {{ $slot }}
+                </div>
+                <div class="col-lg-7 d-none d-lg-block">
+                    {{-- <div id="auth-right" class="h-100 d-flex justify-content-center align-items-center">
+                        <img src="{{ asset('images/uii-campus.jpg') }}" alt="Authentication Image" class="img-fluid">
+                    </div> --}}
+                    <div id="auth-right" class="h-100 d-flex justify-content-center align-items-center" 
+                     style="background-image: url('{{ asset('images/uii-campus.jpg') }}'); background-size: cover; background-position: center;">
+                </div>
                 </div>
             </div>
         </div>

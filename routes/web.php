@@ -13,6 +13,7 @@ use App\Http\Controllers\StreamingController;
 use App\Http\Controllers\PlaybackController;
 use App\Http\Controllers\HelpController;
 use App\Http\Controllers\NilaiKedisiplinanController;
+use App\Http\Controllers\PengaturanController;
 use App\Http\Controllers\SettingsController;
 
 /*
@@ -43,36 +44,36 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
             return view('admin.component.accordion');
         })->name('accordion');
     });
-
     Route::get('/monitoring', function () {
         return view('admin.livemonitoring.monitoring');
     })->name('monitoring');
-    Route::get('/dashbordmonitoring', [DashboardMonitoringController::class, 'index'])->name('dasbordmonitoring');;
+    Route::get('/dashbordmonitoring', [NilaiKedisiplinanController::class, 'index'])->name('nilai-kedisiplinan.index');
     Route::get('/nilai-kedisiplinan', [NilaiKedisiplinanController::class, 'index'])->name('nilai-kedisiplinan.index');
-    // Route::get('/nilai-kedisiplinan', [DashboardMonitoringController::class, 'index'])->name('nilai_kedisiplinan');
     Route::get('/recorded-videos', [RecordedVideoController::class, 'index'])->name('recorded-videos');
     Route::get('/recorded-videos/{id}/playback', [PlaybackController::class, 'playback'])->name('recorded-videos.playback');
-    // Route::prefix('employee')->group(function () {
-    //     Route::get('/', [EmployeeController::class, 'getDataPegawai'])->name('employee');
-    //     Route::get('/{id}/edit', [EmployeeController::class, 'editEmployee'])->name('employee.edit');
-    //     Route::get('/{id}', [EmployeeController::class, 'showEmployee'])->name('employee.show');
-    //     Route::delete('/{id}', [EmployeeController::class, 'destroy'])->name('employee.destroy');
-    // });
     Route::prefix('employee')->group(function () {
         Route::get('/', [EmployeeController::class, 'getDataPegawai'])->name('employee');
         Route::get('/{id}/edit', [EmployeeController::class, 'editEmployee'])->name('employee.edit');
         Route::get('/{id}', [EmployeeController::class, 'showEmployee'])->name('employe.show');
         Route::delete('/{id}', [EmployeeController::class, 'destroy'])->name('employee.destroy');
     });
-    
     Route::get('/live-monitoring', [StreamingController::class, 'startStreaming'])->name('live-monitoring');
     Route::get('/discipline-reports', [KeyPerformanceKpiReportController::class, 'index'])->name('discipline-reports');
+    Route::get('/discipline-reports-monthly', [KeyPerformanceKpiReportController::class, 'disciplineReports'])->name('discipline-reports-monthly');
     Route::get('/start-streaming', [StreamingController::class, 'startStreaming'])->name('start.streaming');
     Route::get('/attendance', [StreamingController::class, 'getAttendance'])->name('get.attendance');
-    // Route::get('/employee', [EmployeeController::class, 'getDataPegawai'])->name('employee');
     Route::post('/presensi/filter', [EmployeeController::class, 'getDataPegawai'])->name('presensi.filter');
     Route::get('/employee-presence', [EmployeePresenceController::class, 'index'])->name('employee-presence');
     Route::get('/attendance-monitoring', [AttendanceMonitoringController::class, 'index'])->name('attendance-monitoring');
+    Route::resource('pengaturan', \App\Http\Controllers\PengaturanController::class);
+    Route::prefix('pengaturan')->middleware('auth')->group(function () {
+        Route::get('/', [PengaturanController::class, 'index'])->name('pengaturan.index');
+        Route::get('/create', [PengaturanController::class, 'create'])->name('pengaturan.create');
+        Route::post('/', [PengaturanController::class, 'store'])->name('pengaturan.store');
+        Route::get('/{id}/edit', [PengaturanController::class, 'edit'])->name('pengaturan.edit');
+        Route::put('/{id}', [PengaturanController::class, 'update'])->name('pengaturan.update');
+        Route::delete('/{id}', [PengaturanController::class, 'destroy'])->name('pengaturan.destroy');
+    });
     Route::prefix('settings')->group(function () {
         Route::get('attendance-types', [SettingsController::class, 'attendanceTypes'])->name('settings.attendance-types');
         Route::get('special-working-hours', [SettingsController::class, 'specialWorkingHours'])->name('settings.special-working-hours');
@@ -83,7 +84,6 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     });
     Route::get('/help', [HelpController::class, 'index'])->name('help');
     Route::get('/presensi', [EmployeePresenceController::class, 'index'])->name('employee-presence.index');
-
     Route::put('/presensi/{id}', [EmployeePresenceController::class, 'update'])->name('employee-presence.update');
     Route::get('/presensi', [EmployeePresenceController::class, 'index'])->name('employee-presence.index');
 
