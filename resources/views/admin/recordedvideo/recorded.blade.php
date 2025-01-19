@@ -22,13 +22,23 @@
                 @foreach ($recentVideos as $video)
                     <div class="flex items-center space-x-4 bg-gray-100 p-4 rounded-lg shadow-md">
                         {{-- <img 
-                            src="{{ $video->thumbnail ?? asset('images/default-thumbnail.jpg') }}" 
+                            src="{{$video->thumbnail ?? asset('images/2024-12-31.jpg') }}" 
                             alt="Thumbnail {{ $video->title }}" 
                             class="w-32 h-20 object-cover rounded-md"> --}}
-                        <img 
+                        {{-- <img 
                             src="{{ asset('thumbnails/' . $video->thumbnail) }}" 
                             alt="Thumbnail {{ $video->title }}" 
-                            class="w-32 h-20 object-cover rounded-md">
+                            class="w-32 h-20 object-cover rounded-md"> --}}
+                        {{-- <img 
+                            src="{{$video->thumbnail ?? asset('thumbnails/2025-01-03.jpg') }}" 
+                            alt="Thumbnail {{ $video->title }}" 
+                            class="w-32 h-20 sm:w-40 sm:h-24 md:w-48 md:h-32 object-contain rounded-md"> --}}
+                        <img 
+                            src="{{$video->thumbnail ?? asset('thumbnails/2025-01-03.jpg') }}" 
+                            alt="Thumbnail {{ $video->title }}" 
+                            class="w-32 h-20 sm:w-40 sm:h-24 md:w-48 md:h-32 object-cover rounded-md">
+                        
+                        
                         <div>
                             <h3 class="text-lg font-semibold">{{ $video->title }}</h3>
                             <p class="text-gray-500 text-sm">{{ $video->description }}</p>
