@@ -21,8 +21,12 @@
             <div class="space-y-4">
                 @foreach ($recentVideos as $video)
                     <div class="flex items-center space-x-4 bg-gray-100 p-4 rounded-lg shadow-md">
-                        <img 
+                        {{-- <img 
                             src="{{ $video->thumbnail ?? asset('images/default-thumbnail.jpg') }}" 
+                            alt="Thumbnail {{ $video->title }}" 
+                            class="w-32 h-20 object-cover rounded-md"> --}}
+                        <img 
+                            src="{{ asset('thumbnails/' . $video->thumbnail) }}" 
                             alt="Thumbnail {{ $video->title }}" 
                             class="w-32 h-20 object-cover rounded-md">
                         <div>
