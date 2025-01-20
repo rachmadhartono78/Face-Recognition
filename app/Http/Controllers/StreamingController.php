@@ -10,7 +10,7 @@ class StreamingController extends Controller
 public function startStreaming()
 {
 
-    $flaskUrl = "http://103.220.113.186:8080";
+    $flaskUrl = "http://103.220.113.186:8080/";
     return view('admin.livemonitoring.streaming', compact('flaskUrl'));
 
         // // URL pertama (lokal)
