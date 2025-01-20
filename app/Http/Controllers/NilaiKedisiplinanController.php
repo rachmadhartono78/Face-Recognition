@@ -35,7 +35,7 @@ class NilaiKedisiplinanController extends Controller
             'izin_terlambat' => PresensiHarianPegawai::where('keterangan', 'like', '%terlambat%')->count(),
             'izin_cuti' => PresensiHarianPegawai::where('keterangan', 'like', '%cuti%')->count(),
             'izin_pulang_awal' => PresensiHarianPegawai::where('keterangan', 'like', '%pulang awal%')->count(),
-            'tpa' => PresensiHarianPegawai::where('total_menit', '<', 15)->count(),
+            'status_aktivitas' => PresensiHarianPegawai::where('total_menit', '<', 15)->count(),
         ];
 
         return view('decipline-velues.decipline-velue', [

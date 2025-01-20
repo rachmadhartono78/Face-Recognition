@@ -27,7 +27,7 @@
                     ['title' => 'Izin Terlambat', 'value' => $stats['izin_terlambat'] . ' Hari', 'bg' => 'bg-primary', 'text' => 'text-white'],
                     ['title' => 'Izin Cuti', 'value' => $stats['izin_cuti'] . ' Hari', 'bg' => 'bg-warning', 'text' => 'text-dark'],
                     ['title' => 'Izin Pulang Awal', 'value' => $stats['izin_pulang_awal'] . ' Hari', 'bg' => 'bg-secondary', 'text' => 'text-white'],
-                    ['title' => 'T/PA (<15)', 'value' => $stats['tpa'] . ' Hari', 'bg' => 'bg-danger', 'text' => 'text-white'],
+                    ['title' => 'Status Aktivitas (>30)', 'value' => $stats['status_aktivitas'] . ' Hari', 'bg' => 'bg-danger', 'text' => 'text-white'],
                 ];
             @endphp
 

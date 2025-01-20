@@ -69,7 +69,7 @@
                             ['title' => 'Izin Terlambat', 'value' => '1 Hari', 'bg' => 'bg-primary', 'text' => 'text-white'],
                             ['title' => 'Izin Cuti', 'value' => '5 Hari', 'bg' => 'bg-warning', 'text' => 'text-dark'],
                             ['title' => 'Izin Pulang Awal', 'value' => '0 Hari', 'bg' => 'bg-secondary', 'text' => 'text-white'],
-                            ['title' => 'T/PA (<15)', 'value' => '82 Hari', 'bg' => 'bg-danger', 'text' => 'text-white'],
+                            ['title' => 'Status Aktivitas (>30)', 'value' => '82 Hari', 'bg' => 'bg-danger', 'text' => 'text-white'],
                         ];
                     @endphp
 
