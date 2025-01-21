@@ -15,6 +15,7 @@ use App\Http\Controllers\HelpController;
 use App\Http\Controllers\NilaiKedisiplinanController;
 use App\Http\Controllers\PengaturanController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\DashboardFaceRecognizeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,9 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::get('/monitoring', function () {
         return view('admin.livemonitoring.monitoring');
     })->name('monitoring');
+    // Route::get('/dashboard-monitoring', [DashboardMonitoringController::class, 'index'])->name('dashboard.monitoring');
+    Route::get('/dashboard-face-recognize', [DashboardFaceRecognizeController::class, 'index'])->name('dashboard.face-recognize');
+    Route::get('/api/chart-data', [DashboardFaceRecognizeController::class, 'chartData'])->name('chart.data');
     Route::get('/dashbordmonitoring', [NilaiKedisiplinanController::class, 'index'])->name('nilai-kedisiplinan.index');
     Route::get('/nilai-kedisiplinan', [NilaiKedisiplinanController::class, 'index'])->name('nilai-kedisiplinan.index');
     Route::get('/recorded-videos', [RecordedVideoController::class, 'index'])->name('recorded-videos');

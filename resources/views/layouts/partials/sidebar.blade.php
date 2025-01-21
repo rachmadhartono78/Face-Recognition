@@ -1,6 +1,8 @@
 <x-maz-sidebar :href="route('dashboard')" :logo="asset('images/logo/logo.png')">
 
     {{-- <x-maz-sidebar-item name="Dashboard" :link="route('dasbordmonitoring')" icon="bi bi-grid-fill"></x-maz-sidebar-item> --}}
+    {{-- <x-maz-sidebar-item name="Dashboard Monitoring" :link="route('dashboard.monitoring')" icon="fas fa-chart-line"></x-maz-sidebar-item> --}}
+    {{-- <x-maz-sidebar-item name="Dashboard Face Recognize" :link="route('dashboard.face-recognize')" icon="fas fa-camera"></x-maz-sidebar-item> --}}
     <x-maz-sidebar-item name="Dashboard" :link="route('nilai-kedisiplinan.index')" icon="bi bi-grid-fill"></x-maz-sidebar-item>
     <x-maz-sidebar-item name="Presensi & Kedisiplinan" icon="bi bi-clock-history">
     <x-maz-sidebar-sub-item name="Presensi Pegawai" :link="route('employee-presence')" icon="bi bi-person-check-fill"></x-maz-sidebar-sub-item>
