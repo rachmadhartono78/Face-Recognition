@@ -42,4 +42,20 @@ INSERT INTO `recorded_videos` VALUES (2, 'CCTV - 1 Desember 2024', 'Deskripsi re
 INSERT INTO `recorded_videos` VALUES (3, 'CCTV - 3 Desember 2024', 'Deskripsi rekaman kedua.', 'videos/new-video2.mp4', 'thumbnails/new-thumbnail2.jpg', '2025-01-10 07:05:24', 240, '2025-01-10 07:05:24', '2025-01-10 07:05:24');
 INSERT INTO `recorded_videos` VALUES (4, 'CCTV - 4 Desember 2024', 'Deskripsi rekaman kedua.', 'videos/new-video2.mp4', 'thumbnails/new-thumbnail2.jpg', '2025-01-10 07:05:24', 240, '2025-01-10 07:05:24', '2025-01-10 07:05:24');
 
+
+UPDATE `recorded_videos` 
+SET `file_path` = 'videos/2025-01-02.mp4', `thumbnail` = 'thumbnails/2025-01-02.jpg'
+WHERE `id` = 1;
+
+UPDATE `recorded_videos` 
+SET `file_path` = 'videos/2024-12-31.mp4', `thumbnail` = 'thumbnails/2024-12-31.jpg'
+WHERE `id` = 2;
+
+UPDATE `recorded_videos` 
+SET `file_path` = 'videos/2025-01-03.mp4', `thumbnail` = 'thumbnails/2025-01-03.jpg'
+WHERE `id` = 3;
+
+UPDATE `recorded_videos` 
+SET `file_path` = 'videos/2025-01-03.mp4', `thumbnail` = 'thumbnails/2025-01-03.jpg'
+WHERE `id` = 4;
 SET FOREIGN_KEY_CHECKS = 1;
