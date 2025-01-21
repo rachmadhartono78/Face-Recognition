@@ -2,8 +2,8 @@
     <x-slot name="header">
         <div class="row align-items-center">
             <div class="col-md-6">
-                <h3>Pengaturan Laporan Kedisiplinan</h3>
-                <p class="text-subtitle text-muted">Mengelola laporan kedisiplinan berdasarkan aturan kerja.</p>
+                <h3>Laporan Kedisiplinan Bulanan</h3>
+                <p class="text-subtitle text-muted">Mengelola laporan kedisiplinan berdasarkan Rekap Bulanan.</p>
             </div>
             <div class="col-md-6 text-md-end">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
