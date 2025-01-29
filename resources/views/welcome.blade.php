@@ -74,6 +74,14 @@
         .dark-mode a {
             color: var(--link-dark);
         }
+
+        .or-text {
+            color: #4a5568; /* Gray-600 di Light Mode */
+        }
+        .dark-mode .or-text {
+            color: #cbd5e0; /* Gray-400 di Dark Mode */
+        }
+
     </style>
 </head>
 
@@ -91,6 +99,7 @@
             <a href="{{ url('/dashboard') }}">Dashboard</a>
             @else
             <a href="{{ route('login') }}">Login</a>
+            <span class="or-text">or</span>
             @if (Route::has('register'))
             <a href="{{ route('register') }}">Register</a>
             @endif
