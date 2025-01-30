@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB; // ✅ Tambahkan ini agar DB bisa digunakan
-use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\DB; //
+use Barryvdh\DomPDF\PDF; 
+// use Barryvdh\DomPDF\Facade as PDF;
+// use Barryvdh\DomPDF\Facade as PDF;
+// use Barryvdh\DomPDF\Facade as PDF;
+//  ✅ Tambahkan ini agar DB bisa digunakan
+// use Barryvdh\DomPDF\Facade as PDF;
 
 class DisciplineReportController extends Controller
 {
@@ -19,8 +24,11 @@ class DisciplineReportController extends Controller
                 'laporan_kedisiplinan.*'
             )
             ->get();
+        // $pdf = PDF::loadView('admin.reportingdecipline.pdf-report', compact('reportsmonthly'));
+        // $pdf = PDF::loadView('admin.reportingdecipline.pdf-report', compact('reportsmonthly'));
+        $pdf = app('dompdf.wrapper')->loadView('admin.reportingdecipline.pdf-report', compact('reportsmonthly'));
 
-        $pdf = PDF::loadView('admin.reportingdecipline.pdf-report', compact('reportsmonthly'));
+
 
         return $pdf->stream('Laporan_Kedisiplinan.pdf'); // ✅ Menampilkan preview PDF di browser
     }
