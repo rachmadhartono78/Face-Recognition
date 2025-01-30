@@ -21,9 +21,12 @@
             <a href="#" class="btn btn-secondary">
                 <i class="fas fa-arrow-left me-2"></i>Kembali
             </a>
-            <button class="btn btn-primary">
+            {{-- <button class="btn btn-primary">
                 <i class="fas fa-print me-2"></i>Print Laporan
-            </button>
+            </button> --}}
+            <a href="{{ route('print-discipline-report') }}" target="_blank" class="btn btn-primary">
+                <i class="fas fa-print me-2"></i>Print Laporan
+            </a>
         </div>
         <!-- Table -->
         <div class="card shadow-sm">

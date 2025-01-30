@@ -23,7 +23,6 @@
 
         <div class="py-6 max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- Tombol Kembali -->
-            <a href="{{ route('recorded-videos') }}" class="btn btn-primary mb-4">Kembali ke Daftar Video</a>
 
             <!-- Video Playback Section -->
             <div class="space-y-4">
@@ -48,6 +47,9 @@
                         <p class="text-gray-400">Durasi: {{ $video->duration ? gmdate('H:i:s', $video->duration) : 'Tidak tersedia' }}</p>
                     </div>
                 </div>
+            </div>
+            <div class="text-center mt-6">
+                <a href="{{ route('recorded-videos') }}" class="btn btn-primary mb-4">Kembali ke Daftar Video</a>
             </div>
         </div>
     </div>

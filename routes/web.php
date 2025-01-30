@@ -16,6 +16,7 @@ use App\Http\Controllers\NilaiKedisiplinanController;
 use App\Http\Controllers\PengaturanController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\DashboardFaceRecognizeController;
+use App\Http\Controllers\DisciplineReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,6 +91,8 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::get('/presensi', [EmployeePresenceController::class, 'index'])->name('employee-presence.index');
     Route::put('/presensi/{id}', [EmployeePresenceController::class, 'update'])->name('employee-presence.update');
     Route::get('/presensi', [EmployeePresenceController::class, 'index'])->name('employee-presence.index');
+    Route::get('/laporan-kedisiplinan/print', [DisciplineReportController::class, 'printDisciplineReport'])->name('print-discipline-report');
+
 
 });
 
