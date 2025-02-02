@@ -8,7 +8,7 @@
     <div class="py-6 max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white shadow-xl sm:rounded-lg p-4">
             <div class="flex justify-between mb-4">
-                <h4 class="text-lg font-bold">Daftar Pengaturan</h4>
+                <h4 class="text-lg font-bold">Pengaturan Treshold</h4>
                 <a href="{{ route('pengaturan.create') }}" class="btn btn-primary">
                     Tambah Pengaturan
                 </a>
