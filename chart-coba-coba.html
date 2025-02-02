@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-blue-50 p-6">
+
+    <!-- Header -->
+    <h1 class="text-3xl font-bold text-blue-900">Dashboard</h1>
+
+    <!-- Statistik -->
+    <div class="grid grid-cols-3 gap-4 mt-4">
+        <div class="bg-white p-4 rounded-xl shadow-md flex items-center justify-between">
+            <div>
+                <p class="text-sm text-gray-600">Total Karyawan</p>
+                <h2 class="text-2xl font-bold">48</h2>
+            </div>
+            <div class="text-blue-500 text-3xl">👤</div>
+        </div>
+        <div class="bg-white p-4 rounded-xl shadow-md flex items-center justify-between">
+            <div>
+                <p class="text-sm text-gray-600">Total Pekerjaan</p>
+                <h2 class="text-2xl font-bold">16</h2>
+            </div>
+            <div class="text-blue-500 text-3xl">📅</div>
+        </div>
+        <div class="bg-white p-4 rounded-xl shadow-md flex items-center justify-between">
+            <div>
+                <p class="text-sm text-gray-600">Total Video</p>
+                <h2 class="text-2xl font-bold">256</h2>
+            </div>
+            <div class="text-blue-500 text-3xl">📹</div>
+        </div>
+    </div>
+
+    <!-- Grafik -->
+    <div class="grid grid-cols-3 gap-4 mt-6">
+        <div class="bg-white p-4 rounded-xl shadow-md col-span-2">
+            <h2 class="text-lg font-bold text-gray-800">Rata-Rata Kinerja Karyawan</h2>
+            <canvas id="performanceChart"></canvas>
+        </div>
+        <div class="bg-white p-4 rounded-xl shadow-md">
+            <h2 class="text-lg font-bold text-gray-800">Komposisi Karyawan</h2>
+            <canvas id="employeeChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Tabel Karyawan -->
+    <div class="bg-white p-4 rounded-xl shadow-md mt-6">
+        <h2 class="text-lg font-bold text-gray-800">Daftar Karyawan</h2>
+        <table class="w-full mt-4 border-collapse">
+            <thead>
+                <tr class="bg-gray-100">
+                    <th class="p-2 text-left">Nama Karyawan</th>
+                    <th class="p-2 text-left">Jabatan</th>
+                    <th class="p-2 text-left">Kinerja</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="border-t">
+                    <td class="p-2 flex items-center gap-2">
+                        <img src="https://i.pravatar.cc/40" class="w-8 h-8 rounded-full"> Anton Rahmat Riyadi
+                    </td>
+                    <td class="p-2">System Analyst</td>
+                    <td class="p-2">Cukup</td>
+                </tr>
+                <tr class="border-t">
+                    <td class="p-2 flex items-center gap-2">
+                        <img src="https://i.pravatar.cc/40?img=2" class="w-8 h-8 rounded-full"> Rachmad Hartono
+                    </td>
+                    <td class="p-2">Backend Developer</td>
+                    <td class="p-2">Sangat Baik</td>
+                </tr>
+                <tr class="border-t">
+                    <td class="p-2 flex items-center gap-2">
+                        <img src="https://i.pravatar.cc/40?img=3" class="w-8 h-8 rounded-full"> Miftakhul Huda
+                    </td>
+                    <td class="p-2">Frontend Developer</td>
+                    <td class="p-2">Kurang</td>
+                </tr>
+                <tr class="border-t">
+                    <td class="p-2 flex items-center gap-2">
+                        <img src="https://i.pravatar.cc/40?img=4" class="w-8 h-8 rounded-full"> Willy Yosua
+                    </td>
+                    <td class="p-2">Database Developer</td>
+                    <td class="p-2">Baik</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Chart.js -->
+    <script>
+        // Chart Kinerja Karyawan
+        const ctx1 = document.getElementById('performanceChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ['Hartono', 'Rio', 'Huda', 'Anton', 'Gana', 'Aji', 'Guntur', 'Sasmita', 'Nisa', 'Yamato', 'Yurika', 'Adit'],
+                datasets: [{
+                    label: 'Kinerja (%)',
+                    data: [90, 80, 70, 95, 100, 75, 85, 60, 70, 85, 90, 95],
+                    backgroundColor: '#3742fa'
+                }]
+            }
+        });
+
+        // Chart Komposisi Karyawan
+        const ctx2 = document.getElementById('employeeChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: ['Wanita', 'Laki-laki'],
+                datasets: [{
+                    data: [30, 70],
+                    backgroundColor: ['#e74c3c', '#1e90ff']
+                }]
+            }
+        });
+    </script>
+
+</body>
+</html>
