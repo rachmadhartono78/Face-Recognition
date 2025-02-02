@@ -16,8 +16,9 @@
     <x-maz-sidebar-item name="Laporan Kedisiplinan" :link="route('discipline-reports-monthly')" icon="bi bi-file-bar-graph"></x-maz-sidebar-item>
     <x-maz-sidebar-item name="Pengaturan" icon="bi bi-gear">
     <x-maz-sidebar-sub-item name="Pengaturan Treshold" :link="route('pengaturan.index')" icon="bi bi-check-square"></x-maz-sidebar-sub-item>
-    <x-maz-sidebar-sub-item name="Jenis Presensi" :link="route('settings.attendance-types')" icon="bi bi-check-square"></x-maz-sidebar-sub-item>
-    <x-maz-sidebar-sub-item name="Jam Kerja Khusus" :link="route('settings.special-working-hours')" icon="bi bi-clock"></x-maz-sidebar-sub-item>
+    <x-maz-sidebar-sub-item name="Jenis Presensi" :link="route('settings.attendance-types.index')" icon="bi bi-check-square"></x-maz-sidebar-sub-item>
+    <x-maz-sidebar-sub-item name="Jam Kerja Khusus" :link="route('settings.special-working-hours.index')" icon="bi bi-clock"></x-maz-sidebar-sub-item>
+    {{-- <x-maz-sidebar-sub-item name="Jam Kerja Khusus" :link="route('settings.special-working-hours')" icon="bi bi-clock"></x-maz-sidebar-sub-item> --}}
     <x-maz-sidebar-sub-item name="Jenis Izin" :link="route('settings.leave-types')" icon="bi bi-file-earmark-text"></x-maz-sidebar-sub-item>
     {{-- <x-maz-sidebar-sub-item name="Hari Libur" :link="route('settings.holidays')" icon="bi bi-calendar-event"></x-maz-sidebar-sub-item> --}}
     <x-maz-sidebar-sub-item name="Upload Video to Manual Analys" :link="route('settings.store_video')" icon="bi bi-cloud-upload"></x-maz-sidebar-sub-item>

@@ -17,6 +17,8 @@ use App\Http\Controllers\PengaturanController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\DashboardFaceRecognizeController;
 use App\Http\Controllers\DisciplineReportController;
+use App\Http\Controllers\SpecialWorkingHoursController;
+use App\Http\Controllers\AttendanceTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,15 +81,34 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
         Route::put('/{id}', [PengaturanController::class, 'update'])->name('pengaturan.update');
         Route::delete('/{id}', [PengaturanController::class, 'destroy'])->name('pengaturan.destroy');
     });
+    // Pengaturan
     Route::prefix('settings')->group(function () {
         Route::get('attendance-types', [SettingsController::class, 'attendanceTypes'])->name('settings.attendance-types');
-        Route::get('special-working-hours', [SettingsController::class, 'specialWorkingHours'])->name('settings.special-working-hours');
+        // Route::get('special-working-hours', [SettingsController::class, 'specialWorkingHours'])->name('settings.special-working-hours');
         Route::get('leave-types', [SettingsController::class, 'leaveTypes'])->name('settings.leave-types');
         Route::get('holidays', [SettingsController::class, 'holidays'])->name('settings.holidays');
         Route::get('criteria', [SettingsController::class, 'criteria'])->name('settings.criteria');
         Route::get('upload-video', [SettingsController::class, 'uploadVideo'])->name('settings.upload_video'); // Untuk menampilkan form upload
         Route::post('upload-video', [SettingsController::class, 'storeVideo'])->name('settings.store_video');
         Route::get('discipline-reports', [SettingsController::class, 'disciplineReports'])->name('settings.descipline-reports');
+    });
+    // Jam Kerja Khusus
+    Route::prefix('settings')->group(function () {
+        Route::get('special-working-hours', [SpecialWorkingHoursController::class, 'index'])->name('settings.special-working-hours.index');
+        Route::get('special-working-hours/create', [SpecialWorkingHoursController::class, 'create'])->name('settings.special-working-hours.create');
+        Route::post('special-working-hours', [SpecialWorkingHoursController::class, 'store'])->name('settings.special-working-hours.store');
+        Route::get('special-working-hours/{id}/edit', [SpecialWorkingHoursController::class, 'edit'])->name('settings.special-working-hours.edit');
+        Route::put('special-working-hours/{id}', [SpecialWorkingHoursController::class, 'update'])->name('settings.special-working-hours.update');
+        Route::delete('special-working-hours/{id}', [SpecialWorkingHoursController::class, 'destroy'])->name('settings.special-working-hours.destroy');
+    });
+    // Tipe Jam Kerja
+    Route::prefix('settings')->group(function () {
+        Route::get('attendance-types', [AttendanceTypeController::class, 'index'])->name('settings.attendance-types.index');
+        Route::get('attendance-types/create', [AttendanceTypeController::class, 'create'])->name('settings.attendance-types.create');
+        Route::post('attendance-types', [AttendanceTypeController::class, 'store'])->name('settings.attendance-types.store');
+        Route::get('attendance-types/{id}/edit', [AttendanceTypeController::class, 'edit'])->name('settings.attendance-types.edit');
+        Route::put('attendance-types/{id}', [AttendanceTypeController::class, 'update'])->name('settings.attendance-types.update');
+        Route::delete('attendance-types/{id}', [AttendanceTypeController::class, 'destroy'])->name('settings.attendance-types.destroy');
     });
     Route::get('/help', [HelpController::class, 'index'])->name('help');
     Route::get('/presensi', [EmployeePresenceController::class, 'index'])->name('employee-presence.index');
