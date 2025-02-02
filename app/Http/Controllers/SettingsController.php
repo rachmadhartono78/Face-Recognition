@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\RecordedVideo;
 
 class SettingsController extends Controller
 {
@@ -55,4 +56,36 @@ public function generateDisciplineReport()
     return redirect()->route('settings.discipline-reports')
         ->with('success', 'Laporan kedisiplinan berhasil dihasilkan.');
     }
+
+    public function uploadVideo()
+    {
+        return view('settings.upload_video');
+    }
+
+    public function storeVideo(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'video' => 'required|mimes:mp4,mov,avi|max:51200', // Maksimal 50MB
+        ]);
+
+        if ($request->hasFile('video')) {
+            $file = $request->file('video');
+            $filePath = $file->store('videos', 'public');
+
+            $recordedVideo = RecordedVideo::create([
+                'title' => $request->title,
+                'description' => $request->description,
+                'file_path' => $filePath,
+                'recorded_at' => now(),
+                'duration' => 0, // Bisa diisi durasi jika ada cara menghitungnya
+            ]);
+
+            return redirect()->route('settings.upload_video')->with('success', 'Video berhasil diunggah.');
+        }
+
+        return back()->withErrors(['video' => 'Gagal mengunggah video']);
+    }
+
 }

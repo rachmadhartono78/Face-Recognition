@@ -19,7 +19,8 @@
     <x-maz-sidebar-sub-item name="Jenis Presensi" :link="route('settings.attendance-types')" icon="bi bi-check-square"></x-maz-sidebar-sub-item>
     <x-maz-sidebar-sub-item name="Jam Kerja Khusus" :link="route('settings.special-working-hours')" icon="bi bi-clock"></x-maz-sidebar-sub-item>
     <x-maz-sidebar-sub-item name="Jenis Izin" :link="route('settings.leave-types')" icon="bi bi-file-earmark-text"></x-maz-sidebar-sub-item>
-    <x-maz-sidebar-sub-item name="Hari Libur" :link="route('settings.holidays')" icon="bi bi-calendar-event"></x-maz-sidebar-sub-item>
+    {{-- <x-maz-sidebar-sub-item name="Hari Libur" :link="route('settings.holidays')" icon="bi bi-calendar-event"></x-maz-sidebar-sub-item> --}}
+    <x-maz-sidebar-sub-item name="Upload Video to Manual Analys" :link="route('settings.store_video')" icon="bi bi-cloud-upload"></x-maz-sidebar-sub-item>
     <x-maz-sidebar-sub-item name="Kriteria Kedisiplinan" :link="route('settings.criteria')" icon="bi bi-calendar-event"></x-maz-sidebar-sub-item>
     <x-maz-sidebar-sub-item name="Pengaaturan Laporan Kedisiplinan" :link="route('settings.descipline-reports')" icon="fas fa-file-alt"></x-maz-sidebar-sub-item>
 

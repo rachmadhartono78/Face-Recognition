@@ -10,4 +10,7 @@ class RecordedVideo extends Model
     use HasFactory;
     protected $table = 'recorded_videos'; // Nama tabel di database
     protected $fillable = ['title', 'description', 'file_path', 'thumbnail', 'recorded_at', 'duration'];
+    protected $casts = [
+        'recorded_at' => 'datetime',
+    ];
 }
