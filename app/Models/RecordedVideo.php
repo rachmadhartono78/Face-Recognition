@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class RecordedVideo extends Model
 {
     use HasFactory;
-    protected $table = 'recorded_videos'; // Nama tabel di database
+    protected $table = 'recorded_videos';
     protected $fillable = ['title', 'description', 'file_path', 'thumbnail', 'recorded_at', 'duration'];
     protected $casts = [
         'recorded_at' => 'datetime',

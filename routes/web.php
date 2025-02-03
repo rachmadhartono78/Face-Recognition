@@ -19,6 +19,7 @@ use App\Http\Controllers\DashboardFaceRecognizeController;
 use App\Http\Controllers\DisciplineReportController;
 use App\Http\Controllers\SpecialWorkingHoursController;
 use App\Http\Controllers\AttendanceTypeController;
+use App\Http\Controllers\DashboardGraficController;
 
 /*
 |--------------------------------------------------------------------------
@@ -116,6 +117,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::get('/presensi', [EmployeePresenceController::class, 'index'])->name('employee-presence.index');
     Route::get('/laporan-kedisiplinan/print', [DisciplineReportController::class, 'printDisciplineReport'])->name('print-discipline-report');
 
+    Route::get('/dashboard-grafic', [DashboardGraficController::class, 'index'])->name('dashboard-grafic'); 
 
 });
 
