@@ -17,34 +17,43 @@
                 </x-slot>
 
                 <div class="container py-4">
-                    <div class="row g-3 mb-4">
-                        <div class="col-md-4 col-lg-2">
-                            <div class="card bg-danger h-100 shadow-sm">
-                                <div class="card-body d-flex flex-column justify-center align-items-center">
-                                    <h5 class="card-title text-center text-white fw-bold">Total Pegawai</h5>
-                                    <p class="card-text fs-4 text-center text-white fw-bold">{{ $totalPegawai }}</p>
+                    <div class="row g-3 mb-4 justify-content-center">
+                        <div class="col-md-4 col-lg-auto">
+                            <div class="card bg-danger h-100 shadow-sm w-auto">
+                                <div class="card-body d-flex align-items-center justify-content-start p-3">
+                                    <i class="bi bi-people-fill text-white fs-2 me-3"></i> <!-- Ikon Pegawai -->
+                                    <div class="d-flex flex-column">
+                                        <h5 class="card-title text-white fw-bold m-0">Total Pegawai</h5>
+                                        <p class="card-text fs-4 text-white fw-bold m-0">{{ $totalPegawai }}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 col-lg-2">
-                            <div class="card bg-primary h-100 shadow-sm">
-                                <div class="card-body d-flex flex-column justify-center align-items-center">
-                                    <h5 class="card-title text-center text-white fw-bold">Total Pekerjaan</h5>
-                                    <p class="card-text fs-4 text-center text-white fw-bold">{{ $totalPekerjaan }}</p>
+                        <div class="col-md-4 col-lg-auto">
+                            <div class="card bg-primary h-100 shadow-sm w-auto">
+                                <div class="card-body d-flex align-items-center justify-content-start p-3">
+                                    <i class="bi bi-briefcase-fill text-white fs-2 me-3"></i> <!-- Ikon Pekerjaan -->
+                                    <div class="d-flex flex-column">
+                                        <h5 class="card-title text-white fw-bold m-0">Total Pekerjaan</h5>
+                                        <p class="card-text fs-4 text-white fw-bold m-0">{{ $totalPekerjaan }}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 col-lg-2">
-                            <div class="card bg-success h-100 shadow-sm">
-                                <div class="card-body d-flex flex-column justify-center align-items-center">
-                                    <h5 class="card-title text-center text-white fw-bold">Total Video</h5>
-                                    <p class="card-text fs-4 text-center text-white fw-bold">{{ $totalVideo }}</p>
+                        <div class="col-md-4 col-lg-auto">
+                            <div class="card bg-success h-100 shadow-sm w-auto">
+                                <div class="card-body d-flex align-items-center justify-content-start p-3">
+                                    <i class="bi bi-camera-reels-fill text-white fs-2 me-3"></i> <!-- Ikon Video -->
+                                    <div class="d-flex flex-column">
+                                        <h5 class="card-title text-white fw-bold m-0">Total Video</h5>
+                                        <p class="card-text fs-4 text-white fw-bold m-0">{{ $totalVideo }}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-    
+                  
         
                 <!-- Grafik -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
