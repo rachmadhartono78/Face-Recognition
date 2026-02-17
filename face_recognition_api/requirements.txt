@@ -1,0 +1,25 @@
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+python-multipart==0.0.6
+pydantic==2.5.3
+pydantic-settings==2.1.0
+
+# Face Recognition
+face-recognition==1.3.0
+opencv-python==4.9.0.80
+opencv-contrib-python==4.9.0.80
+dlib==19.24.2
+Pillow==10.2.0
+
+# Database
+pymysql==1.1.0
+sqlalchemy==2.0.25
+
+# Utilities
+python-dotenv==1.0.0
+psutil==5.9.8
+numpy==1.26.3
+
+# Testing
+pytest==7.4.4
+httpx==0.26.0

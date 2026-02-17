@@ -14,3 +14,26 @@ npm-debug.log
 yarn-error.log
 /.idea
 public/videos/*.png
+node_modules/
+dist/
+build/
+.env
+*.log
+.venv/
+
+# Machine Learning Models
+*.pt
+*.pth
+*.weights
+
+# Binary and Library files
+*.dll
+*.pyd
+*.lib
+*.exe
+*.so
+*.dylib
+
+# Video and large media
+*.mp4
+public/videos/

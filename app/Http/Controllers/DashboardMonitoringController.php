@@ -5,35 +5,43 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
+use App\Models\PresensiHarianPegawai;
+use Illuminate\Support\Facades\DB;
 
 class DashboardMonitoringController extends Controller
 {
     public function index()
     {
-        // Hardcoded data
-        $employee = [
-            (object) ['name' => 'Ubaidurrahman', 'jam_masuk' => '07:34', 'jam_keluar' => '16:05', 'total_jam' => '8 Jam', 'poin' => 1, 'status' => 'Masuk Kerja'],
-            (object) ['name' => 'Abdul Aziz', 'jam_masuk' => '08:14', 'jam_keluar' => '16:10', 'total_jam' => '7 Jam', 'poin' => 0.5, 'status' => 'Terlambat'],
-            // Tambahkan data lainnya...
+        // Query data presensi terbaru dengan relasi ke pengguna
+        $presensi = PresensiHarianPegawai::with('pengguna')
+            ->orderBy('id', 'desc')
+            ->paginate(5);
+
+        // Map data agar sesuai dengan variabel name yang diharapkan view (name -> nama_pegawai)
+        $presensi->getCollection()->transform(function ($item) {
+            return (object)[
+            'name' => $item->pengguna->nama ?? 'Unknown',
+            'jam_masuk' => $item->jam_masuk ?? '-',
+            'jam_keluar' => $item->jam_pulang ?? '-',
+            'total_jam' => $item->total_jam_formatted,
+            'poin' => $item->poin,
+            'status' => $item->status
+            ];
+        });
+
+        // Data statistik untuk kartu di atas (Bisa diambil dari NilaiKedisiplinanController logic)
+        $stats = [
+            'tidak_masuk' => PresensiHarianPegawai::whereNull('jam_masuk')->count(),
+            'masuk_kerja' => PresensiHarianPegawai::whereNotNull('jam_masuk')->count(),
+            'izin_terlambat' => PresensiHarianPegawai::where('keterangan', 'like', '%terlambat%')->count(),
+            'izin_cuti' => PresensiHarianPegawai::where('keterangan', 'like', '%cuti%')->count(),
+            'izin_pulang_awal' => PresensiHarianPegawai::where('keterangan', 'like', '%pulang awal%')->count(),
+            'status_aktivitas' => PresensiHarianPegawai::where('total_menit', '<', 15)->count(),
         ];
-    
-        // Pagination settings
-        $perPage = 5; // Jumlah data per halaman
-        $currentPage = Paginator::resolveCurrentPage(); // Halaman saat ini
-        $collection = collect($employee); // Konversi array ke collection
-    
-        // Buat LengthAwarePaginator
-        $paginatedEmployee = new LengthAwarePaginator(
-            $collection->forPage($currentPage, $perPage), // Data untuk halaman ini
-            $collection->count(), // Total data
-            $perPage, // Jumlah data per halaman
-            $currentPage, // Halaman saat ini
-            ['path' => url()->current()] // URL untuk pagination
-        );
-    
-        // Kirim ke view
+
         return view('admin.dasbordmonitoring.dasbordmonitoring', [
-            'employee' => $paginatedEmployee,
+            'employee' => $presensi,
+            'stats' => $stats,
         ]);
     }
 }

@@ -14,7 +14,7 @@ db_config = {
     'host': 'localhost',
     'user': 'root',
     'password': '',
-    'database': 'keyperformance'
+    'database': 'laravel'
 }
 
 # Create a MySQL connection
@@ -108,7 +108,7 @@ while True:
                 entry_time = attendance_inserted[name]['entry_time']
                 working_hours = (current_time - entry_time).total_seconds() / 3600.0
                 try:
-                    sql_update = "UPDATE attendance SET working_hours = %s WHERE name = %s AND discipline_status = 1"
+                    sql_update = "UPDATE attendance2 SET working_hours = %s WHERE name = %s AND discipline_status = 1"
                     val_update = (working_hours, name)
                     cursor.execute(sql_update, val_update)
                     conn.commit()
@@ -118,7 +118,7 @@ while True:
                 try:
                     entry_time = current_time
                     sql_insert = """
-                        INSERT INTO attendance (name, discipline_status, entry_time, exit_count, last_exit_time, timestamp)
+                        INSERT INTO attendance2 (name, discipline_status, entry_time, exit_count, last_exit_time, timestamp)
                         VALUES (%s, %s, %s, %s, %s, CURRENT_TIMESTAMP)
                     """
                     val_insert = (name, discipline_status, entry_time, 0, current_time)

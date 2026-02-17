@@ -63,22 +63,22 @@
                 <!-- Statistics Cards -->
                 <div class="row g-3 mb-4">
                     @php
-                        $stats = [
-                            ['title' => 'Tidak Masuk', 'value' => '251 Hari', 'bg' => 'bg-danger', 'text' => 'text-white'],
-                            ['title' => 'Masuk Kerja', 'value' => '571 Hari', 'bg' => 'bg-success', 'text' => 'text-white'],
-                            ['title' => 'Izin Terlambat', 'value' => '1 Hari', 'bg' => 'bg-primary', 'text' => 'text-white'],
-                            ['title' => 'Izin Cuti', 'value' => '5 Hari', 'bg' => 'bg-warning', 'text' => 'text-dark'],
-                            ['title' => 'Izin Pulang Awal', 'value' => '0 Hari', 'bg' => 'bg-secondary', 'text' => 'text-white'],
-                            ['title' => 'Status Aktivitas (>30)', 'value' => '82 Hari', 'bg' => 'bg-danger', 'text' => 'text-white'],
+                        $statsCards = [
+                            ['title' => 'Tidak Masuk', 'value' => $stats['tidak_masuk'] . ' Hari', 'bg' => 'bg-danger', 'text' => 'text-white'],
+                            ['title' => 'Masuk Kerja', 'value' => $stats['masuk_kerja'] . ' Hari', 'bg' => 'bg-success', 'text' => 'text-white'],
+                            ['title' => 'Izin Terlambat', 'value' => $stats['izin_terlambat'] . ' Hari', 'bg' => 'bg-primary', 'text' => 'text-white'],
+                            ['title' => 'Izin Cuti', 'value' => $stats['izin_cuti'] . ' Hari', 'bg' => 'bg-warning', 'text' => 'text-dark'],
+                            ['title' => 'Izin Pulang Awal', 'value' => $stats['izin_pulang_awal'] . ' Hari', 'bg' => 'bg-secondary', 'text' => 'text-white'],
+                            ['title' => 'Status Aktivitas (>15)', 'value' => $stats['status_aktivitas'] . ' Hari', 'bg' => 'bg-danger', 'text' => 'text-white'],
                         ];
                     @endphp
 
-                    @foreach ($stats as $stat)
+                    @foreach ($statsCards as $stat)
                         <div class="col-md-4 col-lg-2">
-                            <div class="card {{ $stat['bg'] }} h-100">
+                            <div class="card {{ $stat['bg'] }} h-100 shadow-sm border-0">
                                 <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                                    <h5 class="card-title text-center {{ $stat['text'] }} fw-bold">{{ $stat['title'] }}</h5>
-                                    <p class="card-text fs-4 text-center {{ $stat['text'] }} fw-bold">{{ $stat['value'] }}</p>
+                                    <h5 class="card-title text-center {{ $stat['text'] }} font-bold" style="font-size: 0.8rem;">{{ $stat['title'] }}</h5>
+                                    <p class="card-text fs-5 text-center {{ $stat['text'] }} font-extrabold">{{ $stat['value'] }}</p>
                                 </div>
                             </div>
                         </div>

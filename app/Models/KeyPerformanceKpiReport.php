@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class KeyPerformanceKpiReport extends Model
 {
     use HasFactory;
-    protected $table = 'keyperformancekpi_report';
+    protected $table = 'laporan_kedisiplinan';
 
     public $timestamps = false;
     protected $fillable = [

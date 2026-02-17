@@ -13,18 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pengaturan', function (Blueprint $table) {
-            $table->id();
-            $table->string('kode_pengaturan', 32)->unique();
-            $table->text('isi');
-            $table->string('keterangan', 255);
-            $table->string('user_input', 50)->default('system');
-            $table->string('user_update', 50)->default('system');
-            $table->boolean('flag_aktif')->default(1);
-            $table->timestamps();
-        });
-        
+        if (!Schema::hasTable('pengaturan')) {
+            Schema::create('pengaturan', function (Blueprint $table) {
+                $table->id();
+                $table->string('kode_pengaturan', 32);
+                $table->text('isi');
+                $table->string('keterangan', 255);
+                $table->string('user_input', 50)->default('system');
+                $table->string('user_update', 50)->default('system');
+                $table->tinyInteger('flag_aktif')->default(1);
+                $table->timestamps();
+            });
+        }
     }
+    
 
     /**
      * Reverse the migrations.
@@ -33,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('pengaturan');
     }
 };

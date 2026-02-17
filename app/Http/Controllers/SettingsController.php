@@ -10,23 +10,27 @@ class SettingsController extends Controller
 {
     public function disciplineReports()
     {
-        $reports = DB::table('laporan_kedisiplinan')
-            ->join('pengguna', 'laporan_kedisiplinan.pengguna_id', '=', 'pengguna.id')
+        $reports = DB::table('presensi_harian_pegawai')
+            ->join('pengguna', 'presensi_harian_pegawai.pengguna_id', '=', 'pengguna.id')
             ->select(
-                'pengguna.nama as nama_karyawan',
-                'pengguna.nip',
-                'pengguna.jenis_presensi as jabatan',
-                'laporan_kedisiplinan.*'
-            )
+            'pengguna.nama as nama_karyawan',
+            'pengguna.nip',
+            'pengguna.jenis_presensi as jabatan',
+            'presensi_harian_pegawai.pengguna_id',
+            DB::raw('SUM(total_menit) / 60 as total_jam_kerja'),
+            DB::raw('COUNT(*) as total_kehadiran'),
+            DB::raw("SUM(CASE WHEN jam_masuk <= '08:00:00' THEN 1 ELSE 0 END) as tepat_waktu"),
+            DB::raw("SUM(CASE WHEN jam_masuk > '08:00:00' THEN 1 ELSE 0 END) as terlambat"),
+            DB::raw("SUM(CASE WHEN jam_masuk IS NULL THEN 1 ELSE 0 END) as tidak_hadir")
+        )
+            ->groupBy('pengguna_id', 'pengguna.nama', 'pengguna.nip', 'pengguna.jenis_presensi')
             ->paginate(10);
 
         return view('settings.descipline-reports', compact('reports'));
     }
-
-public function generateDisciplineReport()
-{
-    $presensi = DB::table('presensi_harian_pegawai')
-        ->select(
+    public function generateDisciplineReport()    {
+        $presensi = DB::table('presensi_harian_pegawai')
+            ->select(
             'pengguna_id',
             'nip',
             DB::raw('SUM(working_hours) as total_jam_kerja'),
@@ -36,11 +40,11 @@ public function generateDisciplineReport()
             DB::raw('SUM(CASE WHEN keterangan IS NULL THEN 1 ELSE 0 END) as tidak_hadir'),
             DB::raw('SUM(CASE WHEN total_menit > (working_hours * 60) THEN total_menit - (working_hours * 60) ELSE 0 END) as durasi_tidak_terlihat')
         )
-        ->groupBy('pengguna_id', 'nip')
-        ->get();
+            ->groupBy('pengguna_id', 'nip')
+            ->get();
 
-    foreach ($presensi as $data) {
-        DB::table('laporan_kedisiplinan')->updateOrInsert(
+        foreach ($presensi as $data) {
+            DB::table('laporan_kedisiplinan')->updateOrInsert(
             ['pengguna_id' => $data->pengguna_id, 'nip' => $data->nip],
             [
                 'total_jam_kerja' => $data->total_jam_kerja,
@@ -50,11 +54,11 @@ public function generateDisciplineReport()
                 'tidak_hadir' => $data->tidak_hadir,
                 'durasi_tidak_terlihat' => $data->durasi_tidak_terlihat,
             ]
-        );
-    }
+            );
+        }
 
-    return redirect()->route('settings.discipline-reports')
-        ->with('success', 'Laporan kedisiplinan berhasil dihasilkan.');
+        return redirect()->route('settings.discipline-reports')
+            ->with('success', 'Laporan kedisiplinan berhasil dihasilkan.');
     }
 
     public function uploadVideo()

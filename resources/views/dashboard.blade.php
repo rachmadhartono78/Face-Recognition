@@ -35,8 +35,8 @@
                 <h5>Fitur Utama</h5>
                 <ul>
                     <li><strong>Face Recognition</strong> untuk identifikasi otomatis kehadiran pegawai.</li>
-                    <li><strong>Dashboard Informasi</strong> yang menampilkan data monitoring kedisiplinan secara visual dan interaktif.</li>
-                    <li><strong>Presensi Pegawai</strong> sebagai presensi pegawai secara niometrik wajah.</li>
+                    <li><strong><a href="{{ route('dashboard-grafic') }}" class="text-primary hover:underline">Dashboard Statistik</a></strong> yang menampilkan data monitoring kedisiplinan secara visual dan interaktif.</li>
+                    <li><strong>Presensi Pegawai</strong> sebagai presensi pegawai secara biometrik wajah.</li>
                     <li><strong>Penilaian Kedisiplinan Pegawai</strong> sebagai data pendukung penilaian akhir pegawai.</li>
                 </ul>
             </div>

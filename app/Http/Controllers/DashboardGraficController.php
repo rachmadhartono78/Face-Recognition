@@ -15,21 +15,16 @@ class DashboardGraficController extends Controller
         $totalPekerjaan = Employee::whereIn('jenis_presensi', ['Administrasi', 'Dosen tetap', 'Dosen kontrak', 'Tenaga pendukung'])->count();
         $totalVideo = RecordedVideo::count();
 
-        // Data grafik kinerja pegawai
-        $grafikLabels = Employee::pluck('nama')->toArray();
-        $grafikData = Employee::pluck('jenis_presensi')->toArray(); // Menggunakan jenis_presensi karena tidak ada kolom 'kinerja' dalam tabel pengguna
+        // Data grafik kinerja pegawai (Berdasarkan jumlah presensi)
+        $employees = Employee::withCount('presensiHarian')->get();
+        $grafikLabels = $employees->pluck('nama')->toArray();
+        $grafikData = $employees->pluck('presensi_harian_count')->toArray();
 
-            // Data komposisi pegawai berdasarkan jenis presensi
-        $jumlahAdministrasi = Employee::where('jenis_presensi', 'Administrasi')->count();
-        $jumlahDosenTetap = Employee::where('jenis_presensi', 'Dosen tetap')->count();
-        $jumlahDosenKontrak = Employee::where('jenis_presensi', 'Dosen kontrak')->count();
-        $jumlahTenagaPendukung = Employee::where('jenis_presensi', 'Tenaga pendukung')->count();
-        $komposisiPegawai = [
-            'Administrasi' => $jumlahAdministrasi,
-            'Dosen Tetap' => $jumlahDosenTetap,
-            'Dosen Kontrak' => $jumlahDosenKontrak,
-            'Tenaga Pendukung' => $jumlahTenagaPendukung,
-        ];
+        // Data komposisi pegawai berdasarkan jenis presensi
+        $komposisiPegawai = Employee::select('jenis_presensi', DB::raw('count(*) as total'))
+            ->groupBy('jenis_presensi')
+            ->pluck('total', 'jenis_presensi')
+            ->toArray();
 
         // Daftar pegawai terbaru
         $pegawai = Employee::select('id', 'nama', 'jenis_presensi', 'unit_kerja')
@@ -43,5 +38,6 @@ class DashboardGraficController extends Controller
             'komposisiPegawai', 'pegawai'
         ));
     }
-    
+
+
 }

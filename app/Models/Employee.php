@@ -9,6 +9,11 @@ class Employee extends Model
 {
     use HasFactory;
 
-    protected $table = 'pengguna'; 
+    protected $table = 'pengguna';
     protected $fillable = ['nama', 'nip', 'jenis_presensi', 'unit_kerja', 'foto', 'flag_aktif'];
+
+    public function presensiHarian()
+    {
+        return $this->hasMany(PresensiHarianPegawai::class , 'pengguna_id');
+    }
 }

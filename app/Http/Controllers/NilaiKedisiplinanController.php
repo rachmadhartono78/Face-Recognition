@@ -10,23 +10,10 @@ class NilaiKedisiplinanController extends Controller
 {
     public function index(Request $request)
     {
-        // Query untuk mengambil data presensi
-        $presensi = PresensiHarianPegawai::select(
-            'nip',
-            'tanggal',
-            'jam_masuk',
-            'jam_pulang',
-            DB::raw("TIMEDIFF(jam_pulang, jam_masuk) AS total_jam"),
-            DB::raw("CASE 
-                        WHEN jam_masuk <= '08:00:00' THEN 1 
-                        ELSE 0.5 
-                     END AS poin"),
-            DB::raw("CASE 
-                        WHEN jam_masuk <= '08:00:00' THEN 'Masuk Kerja' 
-                        ELSE 'Terlambat' 
-                     END AS status")
-        )
-        ->paginate(10); // Pagination, 10 data per halaman
+        // Query untuk mengambil data presensi menggunakan model accessors
+        $presensi = PresensiHarianPegawai::orderBy('tanggal', 'desc')
+            ->orderBy('id', 'desc')
+            ->paginate(10);
 
         // Data statistik untuk kartu di atas
         $stats = [
