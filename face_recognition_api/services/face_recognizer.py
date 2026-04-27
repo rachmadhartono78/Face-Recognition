@@ -49,7 +49,7 @@ class FaceRecognizer:
         try:
             # Convert BGR to RGB
             rgb_frame = cv2.cvtColor(frame_np, cv2.COLOR_BGR2RGB)
-            
+
             # Find face locations and encodings
             face_locations = face_recognition.face_locations(rgb_frame)
             face_encodings = face_recognition.face_encodings(rgb_frame, face_locations)
@@ -58,7 +58,7 @@ class FaceRecognizer:
             for face_encoding, face_location in zip(face_encodings, face_locations):
                 # Compare faces
                 face_distances = face_recognition.face_distance(self.known_face_encodings, face_encoding)
-                
+
                 if len(face_distances) > 0:
                     best_match_index = np.argmin(face_distances)
 
@@ -82,12 +82,14 @@ class FaceRecognizer:
                         'name': "Unknown",
                         'confidence': 0.0
                     })
-            
+
             return results
 
         except Exception as e:
             print(f"Recognition error: {str(e)}")
             return []
+
+    def recognize_image(self, image_bytes, threshold=0.6):
         """
         Recognize face from image bytes
         """
@@ -97,7 +99,7 @@ class FaceRecognizer:
         try:
             image = Image.open(io.BytesIO(image_bytes))
             image_np = np.array(image)
-            
+
             # Find face locations and encodings
             face_locations = face_recognition.face_locations(image_np)
             face_encodings = face_recognition.face_encodings(image_np, face_locations)
@@ -107,7 +109,7 @@ class FaceRecognizer:
 
             # We process the first face detected
             face_to_compare = face_encodings[0]
-            
+
             # Compare faces
             face_distances = face_recognition.face_distance(self.known_face_encodings, face_to_compare)
             best_match_index = np.argmin(face_distances)
@@ -120,7 +122,7 @@ class FaceRecognizer:
                     'employee_id': employee_id,
                     'confidence': float(confidence)
                 }
-            
+
             return {'recognized': False, 'confidence': float(1 - face_distances[best_match_index])}
 
         except Exception as e:
@@ -149,7 +151,7 @@ class FaceRecognizer:
                 try:
                     image = face_recognition.load_image_file(image_path)
                     face_encs = face_recognition.face_encodings(image)
-                    
+
                     if face_encs:
                         encodings.append(face_encs[0])
                         ids.append(person_name)
@@ -159,22 +161,22 @@ class FaceRecognizer:
         if encodings:
             if not os.path.exists(settings.MODEL_DIR):
                 os.makedirs(settings.MODEL_DIR)
-                
+
             data = {'encodings': encodings, 'ids': ids}
             with open(settings.FACE_ENCODINGS_FILE, 'wb') as f:
                 pickle.dump(data, f)
-            
+
             self.known_face_encodings = encodings
             self.known_face_ids = ids
             self.is_loaded = True
-            
+
             training_time = time.time() - start_time
             return {
                 'success': True,
                 'total_faces': len(ids),
                 'training_time': round(training_time, 2)
             }
-        
+
         return {
             'success': False,
             'message': 'No face data found in uploads directory',

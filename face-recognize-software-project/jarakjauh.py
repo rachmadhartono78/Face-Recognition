@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import os
 import mediapipe as mp
 import face_recognition
 import mysql.connector
@@ -90,7 +91,7 @@ while True:
             ih, iw, _ = img.shape
             x, y, w, h = int(bboxC.xmin * iw), int(bboxC.ymin * ih), \
                          int(bboxC.width * iw), int(bboxC.height * ih)
-            
+
             face = img[y:y + h, x:x + w]
             face = cv2.resize(face, (0, 0), fx=1.5, fy=1.5)  # Upscale face crop
             faceRGB = cv2.cvtColor(face, cv2.COLOR_BGR2RGB)
