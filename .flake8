@@ -1,0 +1,12 @@
+[flake8]
+exclude =
+    vendor,
+    node_modules,
+    public,
+    storage,
+    bootstrap/cache,
+    database,
+    .venv,
+    .git,
+    __pycache__
+max-line-length = 127
